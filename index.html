@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b4d48">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="代謝ログ">
+  <meta name="description" content="体重と摂取カロリーを記録して消費カロリーを推定する個人用アプリ">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <title>代謝ログ | 自分専用の消費カロリー管理</title>
+  <style>:root{--bg:#f6f8fb;--paper:#fff;--ink:#142638;--soft:#69798b;--line:#e6eaf0;--primary:#14766c;--primary-dark:#0b4d48;--mint:#e7f7f2;--blue:#edf2ff;--orange:#fff4e5;--red:#b84643;--radius:18px;--shadow:0 5px 22px rgba(23,42,63,.045)}
+*{box-sizing:border-box}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-size:15px;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #7fc6bd;outline-offset:2px}.app{max-width:600px;margin:0 auto;padding:26px 19px 108px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.brand{display:flex;align-items:center;gap:11px}.brand-symbol{background:var(--primary-dark);color:white;border-radius:15px;width:43px;height:43px;display:grid;place-items:center;font-size:24px;font-weight:650}.brand-title{font-weight:800;letter-spacing:.015em;font-size:18px}.brand-sub{color:var(--soft);font-size:11px;margin-top:2px}.date-tag{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px;color:var(--soft);font-size:12px;white-space:nowrap}h1,h2,h3,p{margin-top:0}h1{font-size:25px;letter-spacing:-.035em;margin-bottom:7px}h2{font-size:17px;letter-spacing:-.025em}p{line-height:1.65}.eyebrow{font-size:11px;letter-spacing:.1em;font-weight:800;color:#81909e}.subtext{font-size:13px;color:var(--soft)}.hero{border-radius:24px;padding:24px;background:linear-gradient(135deg,#123d43,#0e645a 68%,#187867);color:#fff;box-shadow:0 12px 28px rgba(11,77,72,.13);position:relative;overflow:hidden}.hero:after{content:'';position:absolute;right:-52px;top:-78px;border:38px solid rgba(255,255,255,.045);height:180px;width:180px;border-radius:50%;pointer-events:none}.hero-head{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#d6f3eb;font-size:13px}.state-pill{padding:6px 10px;font-size:11px;background:rgba(255,255,255,.14);border-radius:100px;white-space:nowrap}.big-number{font-size:51px;font-weight:800;line-height:1.18;letter-spacing:-.065em;margin:16px 0 8px;font-variant-numeric:tabular-nums}.big-number small{font-size:17px;font-weight:550;letter-spacing:0;margin-left:6px}.hero-desc{font-size:12px;color:#d1eae4;max-width:410px;line-height:1.65;min-height:20px;margin:0}.hero-footer{border-top:1px solid rgba(255,255,255,.18);margin-top:19px;padding-top:16px;display:flex;justify-content:space-between;gap:12px}.hero-metric small{display:block;color:#bce1da;font-size:11px;margin-bottom:4px}.hero-metric strong{font-size:21px;letter-spacing:-.03em}.hero-metric:last-child{text-align:right}.section{margin-top:23px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}.section-title h2{margin:0}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}.progress-head{display:flex;justify-content:space-between;align-items:center;gap:9px;margin-bottom:10px}.progress-bar{height:8px;background:#e7ecef;border-radius:100px;overflow:hidden}.progress-fill{background:#18a48b;height:100%;border-radius:100px;transition:width .3s}.muted{color:var(--soft)}.small{font-size:12px}.subtle-note{font-size:12px;color:var(--soft);margin-top:10px;margin-bottom:0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:flex;flex-direction:column;gap:8px}.field label{font-size:12px;font-weight:750;color:#506476}.input-shell{display:flex;align-items:center;gap:8px;border:1px solid #dce2e9;border-radius:12px;padding:0 12px;background:white;min-height:49px}.input-shell input,.input-shell select{border:0;outline:0;min-width:0;width:100%;height:46px;background:transparent;color:var(--ink);font-weight:650;font-size:17px;appearance:none}.input-shell span{font-size:12px;color:#85939f;flex-shrink:0}.input-shell:focus-within{border-color:#6dbfb4;box-shadow:0 0 0 3px #e2f5f0}.date-input{font-size:14px!important}.form-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.btn{border:0;border-radius:12px;padding:13px 16px;font-size:14px;font-weight:800;min-height:46px;background:var(--primary);color:#fff}.btn:hover{filter:brightness(.95)}.btn.secondary{background:var(--mint);color:var(--primary-dark)}.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn.danger{background:#fff0ef;color:var(--red)}.btn.full{width:100%;margin-top:14px}.btn.tiny{min-height:34px;padding:7px 11px;font-size:12px}.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.stat-item{padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}.stat-label{font-size:12px;color:var(--soft);margin-bottom:9px}.stat-val{font-size:22px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}.stat-val small{font-size:12px;font-weight:500;color:var(--soft)}.chart-wrap{height:190px;width:100%;position:relative}.chart-wrap svg{width:100%;height:100%;display:block;overflow:visible}.empty-chart{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center;color:var(--soft);font-size:12px;gap:9px}.empty-icon{font-size:29px;filter:grayscale(.3)}.menu{position:fixed;bottom:0;left:0;right:0;z-index:40;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:9px max(14px,calc((100vw - 570px)/2)) max(12px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr)}.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;border-radius:12px;padding:9px 3px;color:#8a98a6;font-size:10px;font-weight:750;min-height:55px}.nav-item svg{width:22px;height:22px}.nav-item.active{background:var(--mint);color:var(--primary-dark)}.tab{display:none}.tab.active{display:block}.history-item{padding:13px 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #edf0f3;gap:10px}.history-item:last-child{border:0}.history-date{font-size:13px;font-weight:750}.history-details{font-size:12px;color:var(--soft);margin-top:5px}.history-edit{background:#edf7f4;border:0;border-radius:10px;padding:8px 12px;color:var(--primary-dark);font-weight:800;font-size:12px}.help-list{margin:10px 0 0;padding-left:21px;color:var(--soft);font-size:13px;line-height:1.8}.nudge{background:#f0f8f6;border:1px solid #d7eee7;color:#22574f;font-size:12px;border-radius:12px;padding:12px;line-height:1.65}.alert{background:#fff4ea;border:1px solid #f4dec8;color:#805831;font-size:12px;border-radius:12px;padding:12px;line-height:1.65}.button-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}.button-row .btn{flex:1}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.setting-row:last-child{border:0}.setting-desc{font-size:12px;color:var(--soft);margin-top:4px}.toast{position:fixed;left:50%;bottom:94px;transform:translateX(-50%) translateY(12px);background:#1b3332;color:white;border-radius:13px;padding:12px 18px;opacity:0;pointer-events:none;transition:.2s;z-index:80;font-weight:650;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.footer{color:#94a0ac;font-size:11px;text-align:center;line-height:1.7;margin-top:25px}.text-link{font-size:12px;color:var(--primary);font-weight:750;text-decoration:none;background:none;border:none;padding:0}.today-label{color:var(--soft);font-size:13px;margin-bottom:18px}.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.chip{font-size:11px;background:#f4f6fa;color:#63748a;padding:7px 9px;border-radius:100px}.annotation{font-size:12px;color:var(--soft);margin-top:8px}.hdivider{height:1px;background:var(--line);margin:17px 0}.mini-select{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px;color:var(--ink)}.tab-heading{margin-bottom:20px}.hidden{display:none!important}@media(max-width:380px){.app{padding:20px 14px 110px}.big-number{font-size:45px}.hero{padding:20px}.stat-val{font-size:19px}}@media(min-width:820px){.app{padding-top:36px}.menu{max-width:580px;margin:auto;border:1px solid var(--line);border-radius:19px 19px 0 0}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="brand-symbol" aria-hidden="true">↗</div><div><div class="brand-title">代謝ログ</div><div class="brand-sub">MY ENERGY TRACKER</div></div></div>
+    <div class="date-tag" id="now-date">今日</div>
+  </header>
+
+  <main>
+    <section class="tab active" data-page="dashboard" aria-label="ホーム">
+      <div class="tab-heading"><h1>今日のダッシュボード</h1><p class="today-label">体重と食事の記録から、あなたの消費カロリーを推定します。</p></div>
+      <div class="hero">
+        <div class="hero-head"><strong>1日の推定消費カロリー</strong><span class="state-pill" id="badge">初期設定値</span></div>
+        <div class="big-number"><span id="estimate">2,050</span><small>kcal</small></div>
+        <p class="hero-desc" id="estimate-desc">初期設定値です。記録がたまると自動推定が始まります。</p>
+        <div class="hero-footer">
+          <div class="hero-metric"><small>摂取カロリー目標</small><strong><span id="target">1,900</span> <span style="font-size:12px;font-weight:500">kcal</span></strong></div>
+          <div class="hero-metric"><small>目標の考え方</small><strong style="font-size:14px" id="target-context">消費 − 150 kcal</strong></div>
+        </div>
+      </div>
+
+      <div id="calibration" class="section">
+        <div class="card">
+          <div class="progress-head"><strong style="font-size:13px">消費カロリーの学習状況</strong><span id="progress-days" class="small muted">0 / 14日</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="calibration-progress" style="width:0"></div></div>
+          <p class="subtle-note" id="progress-help">前日までの摂取カロリーを14日連続で記録してください。</p>
+        </div>
+      </div>
+      <div class="chip-row" id="estimate-facts"></div>
+
+      <div class="section">
+        <div class="section-title"><h2>今日の記録</h2><button class="text-link" id="go-log" type="button">＋ 記録する →</button></div>
+        <div class="stat-grid">
+          <div class="stat-item"><div class="stat-label">摂取カロリー</div><div class="stat-val" id="today-cal" style="font-size:19px">未記録</div></div>
+          <div class="stat-item"><div class="stat-label">体重</div><div class="stat-val" id="today-weight" style="font-size:19px">未記録</div></div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title"><h2>体重の推移</h2><span class="small muted">直近35日</span></div>
+        <div class="card"><div class="chart-wrap" id="weight-chart"><div class="empty-chart">記録がたまるとグラフが表示されます</div></div><p class="subtle-note">日々の水分変動で体重は上下します。長期的な傾向を見よう。</p></div>
+      </div>
+      <div class="section">
+        <div class="section-title"><h2>最近のまとめ</h2></div>
+        <div class="stat-grid">
+          <div class="stat-item"><div class="stat-label">平均摂取カロリー</div><div class="stat-val" id="avg-cal">—</div><div class="subtext" id="avg-cal-caption">過去7日</div></div>
+          <div class="stat-item"><div class="stat-label">直近の体重</div><div class="stat-val" id="latest-weight">—</div><div class="subtext" id="trend-caption">測定なし</div></div>
+        </div>
+      </div>
+      <p class="footer">この推定は食事記録と体重の統計的な概算です。医療的な代謝測定ではありません。</p>
+    </section>
+
+    <section class="tab" data-page="log" aria-label="記録入力">
+      <div class="tab-heading"><h1>記録する</h1><p class="subtext">毎日、摂取カロリーと体重を入力。片方だけでも保存できます。</p></div>
+      <div class="card">
+        <form id="record-form">
+          <div class="form-row"><label for="entry-date" style="font-weight:800">記録する日付</label><div class="input-shell" style="max-width:205px"><input class="date-input" id="entry-date" type="date" required></div></div>
+          <div class="fields">
+            <div class="field"><label for="entry-cal">摂取カロリー</label><div class="input-shell"><input id="entry-cal" type="number" min="500" max="10000" step="1" inputmode="numeric" placeholder="1900"><span>kcal</span></div></div>
+            <div class="field"><label for="entry-weight">体重</label><div class="input-shell"><input id="entry-weight" type="number" min="20" max="400" step="0.1" inputmode="decimal" placeholder="56.5"><span>kg</span></div></div>
+          </div>
+          <p class="subtle-note">朝の体重を、できるだけ同じ条件で測ると精度が上がります。</p>
+          <button type="submit" class="btn full" id="save-entry">この日の記録を保存</button>
+          <button type="button" class="btn danger full hidden" id="delete-entry">この日の記録を削除</button>
+        </form>
+      </div>
+      <div class="section card"><h2>どうやって計算するの？</h2>
+        <p class="subtext">摂取カロリーと体重の変化量から、次の関係を使って推定します。</p>
+        <div class="nudge"><strong>推定消費 ≒ 平均摂取 − 体重変化 (kg/日) × 7,700</strong></div>
+        <ol class="help-list"><li>前日までの摂取カロリーを14日連続で記録</li><li>同期間内に体重を8回以上、12日以上にわたって記録</li><li>直近最大28日間を使い、体重のばらつきを抑える統計処理で毎日再計算</li></ol>
+        <p class="subtle-note">体重の減少がすべて脂肪とは限らないため、短期間の推定には誤差があります。あくまで目安として利用してください。</p>
+      </div>
+    </section>
+
+    <section class="tab" data-page="history" aria-label="記録履歴">
+      <div class="tab-heading"><h1>これまでの記録</h1><p class="subtext" id="history-count">0日分の記録</p></div>
+      <div class="card"><div id="history-list"><p class="subtext">まだ記録はありません。</p></div></div>
+      <p class="subtle-note">過去の日付を編集したい場合は「編集」から変更できます。直近90件を表示しています。</p>
+    </section>
+
+    <section class="tab" data-page="settings" aria-label="設定とバックアップ">
+      <div class="tab-heading"><h1>設定とバックアップ</h1><p class="subtext">自動計算が始まる前の仮の消費カロリーや、目標差分を設定できます。</p></div>
+      <div class="card">
+        <h2>カロリーの設定</h2>
+        <form id="settings-form">
+          <div class="field"><label for="setting-baseline">初期消費カロリー（実測値ではありません）</label><div class="input-shell"><input type="number" id="setting-baseline" min="900" max="5000" step="10" inputmode="numeric"><span>kcal/日</span></div></div>
+          <div class="field" style="margin-top:14px"><label for="setting-offset">推定消費に対する摂取目標の差</label><div class="input-shell"><select id="setting-offset"><option value="-300">−300 kcal（減量）</option><option value="-150">−150 kcal（ゆるやかに減量）</option><option value="0">±0 kcal（維持）</option><option value="150">＋150 kcal（ゆるやかに増量）</option><option value="300">＋300 kcal（増量）</option></select></div></div>
+          <button type="submit" class="btn full">設定を保存</button>
+        </form>
+      </div>
+      <div class="section card"><h2>データのバックアップ</h2><p class="subtext">記録はこの端末のブラウザ内だけに保存されます。機種変更・ブラウザの削除に備えて、JSONを定期的に保存してください。</p>
+        <div class="alert hidden" id="persistence-warning">このブラウザでは保存に失敗している可能性があります。プライベートブラウズなどを避け、データのバックアップをしてください。</div>
+        <div class="button-row"><button id="export-json" type="button" class="btn secondary">JSON保存</button><button id="export-csv" type="button" class="btn ghost">CSV出力</button></div>
+        <button id="restore-trigger" type="button" class="btn ghost full">JSONから復元</button>
+        <input id="import-file" class="hidden" type="file" accept="application/json,.json">
+        <p class="subtle-note">CSVは表計算用です。復元にはこのアプリで出力したJSONを使います。</p>
+      </div>
+      <div class="section card"><h2>iPhoneでアプリのように使う</h2><ol class="help-list"><li>このファイル一式をHTTPSのWebサイトに配置する</li><li>iPhoneのSafariでそのURLを開く</li><li>共有 → 「ホーム画面に追加」を選択</li></ol><p class="subtle-note">無料のGitHub Pagesなどで公開できます。公開されるのはプログラムだけで、記録データは端末内に保存されます。</p></div>
+      <p class="footer">代謝ログ v1.0 ｜ 個人利用・広告なし・アカウント不要</p>
+    </section>
+  </main>
+</div>
+<nav class="menu" aria-label="メインナビゲーション">
+  <button type="button" class="nav-item active" data-tab="dashboard" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>ホーム</button>
+  <button type="button" class="nav-item" data-tab="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="10"/></svg>記録</button>
+  <button type="button" class="nav-item" data-tab="history"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5M3 8a9 9 0 1 1 1 8"/><path d="M12 7v6l4 2"/></svg>履歴</button>
+  <button type="button" class="nav-item" data-tab="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="m19.4 15 .9 1.6-2.3 2.3-1.6-.9a8 8 0 0 1-2 .8L14 21h-4l-.4-2.2a8 8 0 0 1-2-.8l-1.6.9-2.3-2.3.9-1.6a8 8 0 0 1-.8-2L2 12v-0l2-1a8 8 0 0 1 .8-2l-.9-1.6L6.2 5l1.6.9a8 8 0 0 1 2-.8L10 3h4l.4 2.1a8 8 0 0 1 2 .8L18 5l2.3 2.4-.9 1.6a8 8 0 0 1 .8 2l1.8 1-1.8 1a8 8 0 0 1-.8 2Z"/></svg>設定</button>
+</nav>
+<div class="toast" role="status" aria-live="polite" id="toast"></div>
+<script>(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.TDEECore = api;
+})(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : null), function () {
+  'use strict';
+  const DAY = 86400000;
+  const iso = d => {
+    const year = d.getFullYear();
+    return `${year}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  };
+  const parse = d => new Date(`${d}T12:00:00`);
+  const shift = (d, n) => { const out = parse(d); out.setDate(out.getDate() + n); return iso(out); };
+  const diff = (a,b) => Math.round((Date.UTC(+b.slice(0,4),+b.slice(5,7)-1,+b.slice(8,10)) - Date.UTC(+a.slice(0,4),+a.slice(5,7)-1,+a.slice(8,10)))/DAY);
+  const mean = nums => nums.reduce((a,b)=>a+b,0)/nums.length;
+  function median(values) {
+    const sorted = [...values].sort((a,b)=>a-b);
+    const mid = Math.floor(sorted.length/2);
+    return sorted.length%2 ? sorted[mid] : (sorted[mid-1]+sorted[mid])/2;
+  }
+  function weightedSlope(xs, ys, weights) {
+    const wsum = weights.reduce((a,b)=>a+b,0);
+    const mx = xs.reduce((a,x,i)=>a + x*weights[i],0)/wsum;
+    const my = ys.reduce((a,y,i)=>a + y*weights[i],0)/wsum;
+    const numerator = xs.reduce((a,x,i)=>a+weights[i]*(x-mx)*(ys[i]-my),0);
+    const denominator = xs.reduce((a,x,i)=>a+weights[i]*(x-mx)**2,0);
+    return denominator ? numerator/denominator : 0;
+  }
+  function robustWeightSlope(weights) {
+    const anchor=weights[0].date;
+    const xs=weights.map(r=>diff(anchor,r.date));
+    const ys=weights.map(r=>r.weight);
+    let slope = weightedSlope(xs,ys,ys.map(()=>1));
+    for(let iter=0;iter<5;iter++) {
+      const intercept=median(ys.map((y,i)=>y-slope*xs[i]));
+      const errors=ys.map((y,i)=>Math.abs(y-intercept-slope*xs[i]));
+      const scale=Math.max(.15, 1.4826*median(errors));
+      const w=errors.map(e=>Math.min(1, 1.345*scale/Math.max(e,0.000001)));
+      slope=weightedSlope(xs,ys,w);
+    }
+    return slope;
+  }
+  function calculate(entries, today) {
+    const records = Object.values(entries || {})
+      .filter(r => r && typeof r.date === 'string' && r.date < today && /^\d{4}-\d\d-\d\d$/.test(r.date));
+    const caloriesByDate = new Map(records.filter(r=>Number.isFinite(+r.calories) && +r.calories>=500 && +r.calories<=10000)
+      .map(r=>[r.date,+r.calories]));
+    const weightByDate = new Map(records.filter(r=>Number.isFinite(+r.weight) && +r.weight>=20 && +r.weight<=400)
+      .map(r=>[r.date,+r.weight]));
+    const calorieDates=[...caloriesByDate.keys()].sort();
+    if (!calorieDates.length) return {ready:false, days:0, weightDays:0, span:0, reason:'calories', required:14};
+    // Use the newest uninterrupted run of full-day calorie logs; never treat a missing log as zero intake.
+    let run=[calorieDates[calorieDates.length-1]];
+    for(let i=calorieDates.length-2;i>=0&&run.length<28;i--) {
+      if(diff(calorieDates[i],run[run.length-1])!==1) break;
+      run.push(calorieDates[i]);
+    }
+    run.reverse();
+    const inRun=run.map(date=>({date,calories:caloriesByDate.get(date),weight:weightByDate.get(date)}));
+    const weights=inRun.filter(r=>typeof r.weight==='number');
+    const span=weights.length>=2?diff(weights[0].date,weights[weights.length-1].date):0;
+    const status={ready:false, days:run.length, weightDays:weights.length, span, required:14,
+      first:run[0], last:run[run.length-1]};
+    if(run.length<14) return {...status,reason:'calories'};
+    if(weights.length<8 || span<12) return {...status,reason:'weight'};
+    const start=weights[0].date, end=weights[weights.length-1].date;
+    const participating=inRun.filter(r=>r.date>=start&&r.date<=end);
+    const avgCalories=mean(participating.map(r=>r.calories));
+    const slope=robustWeightSlope(weights);
+    const rawTdee=avgCalories - slope*7700;
+    if(!Number.isFinite(rawTdee)||rawTdee<900||rawTdee>5000||Math.abs(slope)>.18){
+      return {...status, reason:'outlier', rawTdee, slope, avgCalories};
+    }
+    return {...status, ready:true, estimated:Math.round(rawTdee/10)*10, rawTdee,
+      avgCalories:Math.round(avgCalories), slope, weeklyChange:slope*7,
+      period:diff(start,end)+1, quality:run.length>=21&&weights.length>=14&&span>=19?'high':'developing'};
+  }
+  function weightTrend(entries,today,lookback=35) {
+    return Object.values(entries||{}).filter(r=>r && r.date && r.date<=today && typeof r.weight==='number' && r.date>=shift(today,-lookback+1))
+      .map(r=>({date:r.date,weight:r.weight})).sort((a,b)=>a.date.localeCompare(b.date));
+  }
+  return {iso,shift,diff,calculate,weightTrend,robustWeightSlope};
+});
+</script>
+<script>(function(){
+'use strict';
+const Core = window.TDEECore;
+const KEY='metabolog.v1';
+const $=id=>document.getElementById(id);
+const today=()=>Core.iso(new Date());
+const defaultData=()=>({version:1,settings:{baseline:2050,offset:-150},entries:{}});
+let state=defaultData();
+let persistent=true;
+let noticeTimer;
+const fmt=n=>Math.round(n).toLocaleString('ja-JP');
+const niceDate=d=>{ const parts=d.split('-');return `${+parts[1]}月${+parts[2]}日`; };
+function safeNumber(value,min,max){const n=Number(value);return value!==''&&value!==null&&value!==undefined&&Number.isFinite(n)&&n>=min&&n<=max?n:null;}
+function cleanEntries(raw){
+ const entries={};
+ if(!raw || typeof raw!=='object')return entries;
+ for(const [date,r] of Object.entries(raw)){
+   if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!r||typeof r!=='object'||date>today())continue;
+   const weight=safeNumber(r.weight,20,400),calories=safeNumber(r.calories,500,10000);
+   if(weight!==null||calories!==null)entries[date]={date,weight,calories};
+ }
+ return entries;
+}
+function load(){
+ try{const raw=localStorage.getItem(KEY);if(raw){const input=JSON.parse(raw);const baseline=safeNumber(input?.settings?.baseline,900,5000);const offset=safeNumber(input?.settings?.offset,-700,700);state={version:1,settings:{baseline:baseline??2050,offset:offset??-150},entries:cleanEntries(input.entries)};}}catch(e){persistent=false;}
+}
+function store(){
+ try{localStorage.setItem(KEY,JSON.stringify(state));persistent=true;return true;}catch(e){persistent=false;return false;}
+}
+function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>el.classList.remove('show'),2900);}
+function getCalc(){return Core.calculate(state.entries,today());}
+function displayEstimate(calc){return calc.ready?calc.estimated:state.settings.baseline;}
+function renderDashboard(){
+ const calc=getCalc(), estimate=displayEstimate(calc),target=Math.round((estimate+state.settings.offset)/10)*10;
+ $('estimate').textContent=fmt(estimate);
+ $('target').textContent=fmt(target);
+ $('badge').textContent=calc.ready?'自動推定中':'初期設定値';
+ $('estimate-desc').textContent=calc.ready
+   ?`前日までの${calc.period}日間の記録をもとに推定。${calc.quality==='high'?'記録は比較的充実しています。':'まだ変動しやすいので、記録を続けよう。'}`
+   :'まだ実測データによる推定前。初期設定の2,050 kcalを基準に、記録から少しずつ学習します。'.replace('2,050',fmt(state.settings.baseline));
+ $('target-context').textContent=state.settings.offset===0?'消費カロリーと同じ（維持）':state.settings.offset<0?`消費 − ${fmt(-state.settings.offset)} kcal`:`消費 ＋ ${fmt(state.settings.offset)} kcal`;
+ $('calibration').classList.toggle('hidden',calc.ready);
+ $('calibration-progress').style.width=`${Math.min(100,Math.floor(calc.days/14*100))}%`;
+ $('progress-days').textContent=`${calc.days} / 14日`;
+ if(calc.reason==='weight') $('progress-help').textContent=`摂取記録はOK。体重記録は${calc.weightDays}/8日、記録間隔は${calc.span}/12日（両方必要）。`;
+ else if(calc.reason==='outlier') $('progress-help').textContent='体重の変化から計算した値が不自然です。入力値を見直して、記録を続けてください。';
+ else $('progress-help').textContent='前日までの摂取カロリーを14日連続で入力し、体重も8日以上（12日以上にわたって）記録すると自動推定が始まります。';
+ const t=today();const todays=state.entries[t]||{};
+ $('today-cal').textContent=todays.calories!==null&&todays.calories!==undefined?`${fmt(todays.calories)} kcal`:'未記録';
+ $('today-weight').textContent=todays.weight!==null&&todays.weight!==undefined?`${todays.weight.toFixed(1)} kg`:'未記録';
+ const recent=Object.values(state.entries).filter(r=>r.calories!==null&&r.calories!==undefined&&r.date<=t&&r.date>=Core.shift(t,-6));
+ $('avg-cal').textContent=recent.length?`${fmt(recent.reduce((sum,r)=>sum+r.calories,0)/recent.length)} kcal`:'—';
+ $('avg-cal-caption').textContent=`過去7日：${recent.length}日分の記録`; 
+ const trend=Core.weightTrend(state.entries,t,35);
+ $('latest-weight').textContent=trend.length?`${trend[trend.length-1].weight.toFixed(1)} kg`:'—';
+ $('trend-caption').textContent=trend.length>1?`過去35日：${trend.length}回の測定`:'体重を記録しよう';
+ if(calc.ready){$('estimate-facts').innerHTML=`<div class="chip">平均摂取 ${fmt(calc.avgCalories)} kcal</div><div class="chip">体重傾向 ${calc.weeklyChange>=0?'+':''}${calc.weeklyChange.toFixed(2)} kg/週</div>`;}else $('estimate-facts').innerHTML='';
+ drawChart(trend);
+}
+function drawChart(trend){
+ const root=$('weight-chart');
+ if(trend.length<2){root.innerHTML='<div class="empty-chart"><span class="empty-icon">↗</span><span>体重を2回以上記録すると、ここにグラフが表示されます。</span></div>';return;}
+ const w=500,h=190,padL=38,padR=12,padT=12,padB=26;
+ const mn=Math.min(...trend.map(r=>r.weight)),mx=Math.max(...trend.map(r=>r.weight));
+ const floor=Math.floor((mn-.3)*2)/2,ceil=Math.ceil((mx+.3)*2)/2;
+ const y=v=>padT+(ceil-v)/(ceil-floor)*(h-padT-padB);
+ const xDate=d=>padL+(Core.diff(trend[0].date,d)/Math.max(1,Core.diff(trend[0].date,trend[trend.length-1].date)))*(w-padL-padR);
+ const points=trend.map(d=>`${xDate(d.date).toFixed(1)},${y(d.weight).toFixed(1)}`).join(' ');
+ const dots=trend.map(d=>`<circle cx="${xDate(d.date).toFixed(1)}" cy="${y(d.weight).toFixed(1)}" r="3.5" fill="#128574" stroke="white" stroke-width="1.5" />`).join('');
+ const ticks=[floor,(floor+ceil)/2,ceil];
+ const lines=ticks.map(t=>`<line x1="${padL}" y1="${y(t)}" x2="${w-padR}" y2="${y(t)}" stroke="#e8edf1" stroke-dasharray="3 4"/><text x="${padL-7}" y="${y(t)+4}" text-anchor="end" font-size="11" fill="#91a0aa">${t.toFixed(1)}</text>`).join('');
+ root.innerHTML=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${niceDate(trend[0].date)}から${niceDate(trend[trend.length-1].date)}までの体重推移"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#46b39b" stop-opacity=".20"/><stop offset="100%" stop-color="#46b39b" stop-opacity="0"/></linearGradient></defs>${lines}<polygon points="${padL},${h-padB} ${points} ${xDate(trend[trend.length-1].date)},${h-padB}" fill="url(#g)"/><polyline points="${points}" fill="none" stroke="#128574" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${dots}<text x="${padL}" y="${h-5}" font-size="11" fill="#91a0aa">${niceDate(trend[0].date)}</text><text x="${w-padR}" y="${h-5}" font-size="11" text-anchor="end" fill="#91a0aa">${niceDate(trend[trend.length-1].date)}</text></svg>`;
+}
+function renderHistory(){
+ const root=$('history-list');
+ const entries=Object.values(state.entries).sort((a,b)=>b.date.localeCompare(a.date));
+ $('history-count').textContent=`${entries.length}日分の記録`;
+ if(!entries.length){root.innerHTML='<p class="subtext">まだ記録はありません。まずは今日の体重か摂取カロリーを入力しよう。</p>';return;}
+ root.innerHTML='';
+ for(const r of entries.slice(0,90)){
+  const row=document.createElement('div');row.className='history-item';
+  const left=document.createElement('div'),date=document.createElement('div'),desc=document.createElement('div'),btn=document.createElement('button');
+  date.className='history-date';date.textContent=`${niceDate(r.date)}（${r.date.slice(0,4)}）`;
+  desc.className='history-details';desc.textContent=`${r.weight==null?'体重 —':`体重 ${r.weight.toFixed(1)} kg`}　/　${r.calories==null?'摂取 —':`摂取 ${fmt(r.calories)} kcal`}`;
+  btn.type='button';btn.className='history-edit';btn.textContent='編集';btn.addEventListener('click',()=>{navigate('log');$('entry-date').value=r.date;fillEntry();});
+  left.append(date,desc);row.append(left,btn);root.append(row);
+ }
+}
+function fillEntry(){const entry=state.entries[$('entry-date').value]||{};
+ $('entry-cal').value=entry.calories??'';$('entry-weight').value=entry.weight??'';
+ $('delete-entry').classList.toggle('hidden',!state.entries[$('entry-date').value]);
+}
+function update(){renderDashboard();renderHistory();renderSettings();}
+function renderSettings(){
+ if(document.activeElement!==$('setting-baseline'))$('setting-baseline').value=state.settings.baseline;
+ if(document.activeElement!==$('setting-offset'))$('setting-offset').value=state.settings.offset;
+ $('persistence-warning').classList.toggle('hidden',persistent);
+}
+function navigate(name){
+ document.querySelectorAll('.tab').forEach(el=>el.classList.toggle('active',el.dataset.page===name));
+ document.querySelectorAll('.nav-item').forEach(el=>{const active=el.dataset.tab===name;el.classList.toggle('active',active);el.setAttribute('aria-current',active?'page':'false');});
+ if(name==='log')fillEntry();
+ window.scrollTo({top:0,behavior:'instant'});
+}
+function saveEntry(){
+ const date=$('entry-date').value;
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||date>today()){toast('正しい日付を入力してください');return;}
+ const calraw=$('entry-cal').value.trim(),wraw=$('entry-weight').value.trim();
+ const calories=safeNumber(calraw,500,10000),weight=safeNumber(wraw,20,400);
+ if(calraw&&calories===null){toast('摂取カロリーは500〜10,000で入力');return;}
+ if(wraw&&weight===null){toast('体重は20〜400 kgで入力');return;}
+ if(calories===null&&weight===null){toast('体重か摂取カロリーを入力してください');return;}
+ state.entries[date]={date,calories,weight};
+ if(store())toast('記録を保存しました');else toast('保存できません。JSONでバックアップを');
+ update();
+}
+function deleteEntry(){const date=$('entry-date').value;if(!state.entries[date])return;
+ if(!confirm(`${niceDate(date)}の記録を削除しますか？`))return;
+ delete state.entries[date];store();fillEntry();update();toast('記録を削除しました');}
+function saveSettings(){
+ const baseline=safeNumber($('setting-baseline').value,900,5000),offset=safeNumber($('setting-offset').value,-700,700);
+ if(baseline===null||offset===null){toast('設定値を確認してください');return;}
+ state.settings={baseline,offset};store();update();toast('設定を保存しました');
+}
+function dl(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportJSON(){dl(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),`metabolog-backup-${today()}.json`);toast('バックアップを書き出しました');}
+function exportCSV(){
+ const rows=['date,calories,weight_kg',...Object.values(state.entries).sort((a,b)=>a.date.localeCompare(b.date)).map(r=>`${r.date},${r.calories??''},${r.weight??''}`)];
+ dl(new Blob(['\ufeff'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'}),`metabolog-data-${today()}.csv`);
+}
+async function importJSON(file){
+ if(!file)return;
+ try{
+  const raw=JSON.parse(await file.text());
+  if(!raw || raw.version!==1 || !raw.entries || typeof raw.entries!=='object')throw new Error('format');
+  const entries=cleanEntries(raw.entries);
+  if(!confirm(`バックアップの${Object.keys(entries).length}日分の記録を読み込みます。現在の同じ日付の記録は上書きされます。続けますか？`))return;
+  state.entries={...state.entries,...entries};
+  const baseline=safeNumber(raw.settings?.baseline,900,5000),offset=safeNumber(raw.settings?.offset,-700,700);
+  if(baseline!==null)state.settings.baseline=baseline;
+  if(offset!==null)state.settings.offset=offset;
+  store();update();fillEntry();toast(`${Object.keys(entries).length}日分を読み込みました`);
+ }catch(e){toast('読み込めません。専用JSONファイルか確認してください');}
+ finally{$('import-file').value='';}
+}
+function init(){
+ load();$('entry-date').max=today();$('entry-date').value=today();
+ $('now-date').textContent=new Intl.DateTimeFormat('ja-JP',{month:'long',day:'numeric',weekday:'short'}).format(new Date());
+ document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>navigate(btn.dataset.tab)));
+ $('go-log').addEventListener('click',()=>navigate('log'));
+ $('entry-date').addEventListener('change',fillEntry);
+ $('record-form').addEventListener('submit',e=>{e.preventDefault();saveEntry();});
+ $('delete-entry').addEventListener('click',deleteEntry);
+ $('settings-form').addEventListener('submit',e=>{e.preventDefault();saveSettings();});
+ $('export-json').addEventListener('click',exportJSON);
+ $('export-csv').addEventListener('click',exportCSV);
+ $('import-file').addEventListener('change',e=>importJSON(e.target.files[0]));
+ $('restore-trigger').addEventListener('click',()=>$('import-file').click());
+ update();navigate('dashboard');
+ if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body></html>
