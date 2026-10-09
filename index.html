@@ -148,10 +148,10 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
         <button type="button" class="btn full" id="workout-save">この日の筋トレを保存</button>
       </div>
       <div class="section card"><div class="section-title"><h2>筋トレ履歴</h2><span class="small muted" id="workout-count">0回</span></div><div class="history-control-row"><input type="month" id="workout-history-month" aria-label="筋トレ履歴の月を指定"><button type="button" id="workout-history-all" class="btn ghost tiny">全期間</button></div><div id="workout-history"></div></div>
-      <div class="section card"><div class="section-title"><h2>翌週の週3メニュー</h2><span class="eyebrow">提案</span></div><p class="subtext">この週のトレーニング部位と種目を優先して、翌週の月・水・金に提案。記録のない部位は基本メニューで補完します。</p>
+      <div class="section card"><div class="section-title"><h2>翌週の週3メニュー</h2><span class="eyebrow">提案</span></div><p class="subtext">選択した週に実際に記録した種目だけを使い、翌週の月・水・金に割り振ります。ジムにない機種を勝手に追加しません。記録がない週は提案しません。</p>
         <div class="week-switch"><button class="btn ghost tiny" id="training-week-prev" type="button">← 前週</button><div id="training-week-label" class="week-label">今週の実績</div><button class="btn ghost tiny" id="training-week-next" type="button">次週 →</button></div><div class="nudge" id="training-week-stats"></div>
         <div class="button-row"><button type="button" id="training-generate" class="btn secondary">提案を再作成</button><button type="button" id="training-save-plan" class="btn">提案を保存</button></div><div id="training-plan" class="training-plan"></div>
-        <p class="subtle-note">重量は直近の記録があれば参考値として表示します（自動的に増量しません）。未記録の部位は0kg＝重量未設定。痛みがある動作は避け、体調に合わせて調整してください。</p>
+        <p class="subtle-note">重さ・回数・セット数は前の週の記録を参考値として表示します。種類が少ない場合は同じ種目を複数日に配置します。痛みや強い疲労がある動作は避け、体調に合わせて調整してください。</p>
       </div>
     </section>
     <section class="tab" data-page="settings"><div class="tab-heading"><h1>設定とバックアップ</h1><p class="subtext">消費カロリーの初期値やデータの書き出し・復元を管理。</p></div>
@@ -166,7 +166,7 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
         <p class="subtle-note">v1/v2/v3/v4のJSONも取り込めます。筋トレも含みます。同じ日付は新しい読み込みデータが優先されます。</p>
       </div>
       <div class="section card"><h2>パスコード・プライバシー</h2><p class="subtext">起動時にPINを要求し、10分の無操作、または他の画面に1分以上移動して戻ったときもロックします。変更機能は後日追加予定です。</p><p class="subtle-note">GitHub Pagesのページとコード自体は誰でも開けます。6桁PINによる端末内の保護であり、強固な認証やクラウド保存ではありません。</p></div>
-      <p class="footer">代謝ログ v4.0.0 • 無料・広告なし・端末内保存</p>
+      <p class="footer">代謝ログ v4.1.0 • 無料・広告なし・端末内保存</p>
     </section>
   </main>
 </div>
@@ -258,13 +258,12 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
 </script><script>(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.TrainingCore=api;})(typeof window!=='undefined'?window:globalThis,function(){
 'use strict';
 const MUSCLES=['胸','背中','肩','脚（前）','脚（後）・臀部','腕（二頭）','腕（三頭）','腹筋・体幹','ふくらはぎ','その他'];
-const DEFAULTS={'胸':'チェストプレス','背中':'ラットプルダウン','肩':'ショルダープレス','脚（前）':'レッグプレス','脚（後）・臀部':'レッグカール','腕（二頭）':'アームカール','腕（三頭）':'ケーブルプレスダウン','腹筋・体幹':'クランチ','ふくらはぎ':'カーフレイズ','その他':'好きな種目'};
 const TEMPLATES=[
- {day:0,label:'A・全身 / 胸・背中・脚',muscles:['胸','背中','脚（前）','腹筋・体幹']},
- {day:2,label:'B・全身 / 肩・脚・背中',muscles:['肩','脚（後）・臀部','背中','腕（三頭）']},
- {day:4,label:'C・全身 / 胸・背中・脚',muscles:['胸','背中','脚（前）','腕（二頭）']},
+ {day:0,label:'A・月曜日'},
+ {day:2,label:'B・水曜日'},
+ {day:4,label:'C・金曜日'},
 ];
-const validDate=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&!isNaN(Date.parse(s+'T12:00:00'))&&new Date(s+'T12:00:00').getFullYear()===+s.slice(0,4);
+const validDate=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&!isNaN(Date.parse(s+'T12:00:00'))&&localISO(new Date(s+'T12:00:00'))===s;
 const monday=date=>{const d=new Date(date+'T12:00:00');d.setDate(d.getDate()-(d.getDay()+6)%7);return localISO(d);};
 const localISO=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const shift=(date,n)=>{const d=new Date(date+'T12:00:00');d.setDate(d.getDate()+n);return localISO(d);};
@@ -274,18 +273,55 @@ function cleanExercise(e){if(!e||!MUSCLES.includes(e.muscle))return null;const r
 function cleanWorkout(w,today){if(!w||!validDate(w.date)||w.date>today)return null;const ex=Array.isArray(w.exercises)?w.exercises.slice(0,30).map(cleanExercise).filter(Boolean):[];if(!ex.length)return null;const t=/^([01]\d|2[0-3]):[0-5]\d$/.test(w.time||'')?w.time:'12:00';return {id:text(w.id,90)||'wo-'+Math.random().toString(36).slice(2),date:w.date,time:t,gym:text(w.gym,90),note:text(w.note,200),exercises:ex};}
 function cleanWorkouts(a,today){return Array.isArray(a)?a.slice(0,2000).map(x=>cleanWorkout(x,today)).filter(Boolean):[];}
 function getWeekStats(workouts,from){const to=shift(from,7);const list=workouts.filter(w=>w.date>=from&&w.date<to);const tally={};for(const w of list)for(const ex of w.exercises)tally[ex.muscle]=(tally[ex.muscle]||0)+ex.sets;return {sessions:list.length,sets:Object.values(tally).reduce((a,b)=>a+b,0),tally,workouts:list};}
+const exerciseKey=ex=>JSON.stringify([ex.muscle,(ex.name||'').trim().toLocaleLowerCase()]);
+// Take only exercises performed DURING the selected source week. Never add a default movement,
+// an exercise from an older week, or a movement inferred from a muscle category.
+function weeklyInventory(workouts,sourceWeek){
+ const week=getWeekStats(workouts,monday(sourceWeek));
+ const sessions=[...week.workouts].sort((a,b)=>(b.date+' '+b.time).localeCompare(a.date+' '+a.time));
+ const inventory=new Map();
+ for(const session of sessions)for(const ex of session.exercises){
+  const key=exerciseKey(ex);
+  if(!inventory.has(key))inventory.set(key,{...ex,weeklySets:0,observations:0});
+  const found=inventory.get(key);found.weeklySets+=ex.sets;found.observations++;
+ }
+ return {week,items:[...inventory.values()]};
+}
+function isPlanGrounded(plan,workouts){
+ if(!plan||!Array.isArray(plan.days)||plan.days.length!==3)return false;
+ const seen=new Set(weeklyInventory(workouts,plan.sourceWeek).items.map(exerciseKey));
+ return seen.size>0 && plan.days.every(d=>Array.isArray(d.exercises)&&d.exercises.length>0&&d.exercises.every(ex=>seen.has(exerciseKey(ex))));
+}
 function cleanPlan(p){if(!p||!validDate(p.sourceWeek)||monday(p.sourceWeek)!==p.sourceWeek||!validDate(p.nextWeek)||p.nextWeek!==shift(p.sourceWeek,7)||!Array.isArray(p.days)||p.days.length!==3)return null;
  const days=p.days.map((d,i)=>{const tmpl=TEMPLATES[i],ex=Array.isArray(d.exercises)?d.exercises.slice(0,8).map(cleanExercise).filter(Boolean):[];if(!ex.length)return null;return {date:shift(p.nextWeek,tmpl.day),label:tmpl.label,exercises:ex};});return days.some(x=>!x)?null:{sourceWeek:p.sourceWeek,nextWeek:p.nextWeek,days,saved:true};}
-function makePlan(workouts,sourceWeek){const from=monday(sourceWeek),week=getWeekStats(workouts,from),next=shift(from,7);
- const eligible=workouts.filter(w=>w.date<next).sort((a,b)=>(b.date+' '+b.time).localeCompare(a.date+' '+a.time));
- const all=[];for(const w of eligible){const prioritized=w.date>=from&&w.date<next;for(const ex of w.exercises)all.push({...ex,date:w.date,prioritized});}
- const days=TEMPLATES.map(t=>({date:shift(next,t.day),label:t.label,exercises:t.muscles.map(muscle=>{
- const matches=all.filter(x=>x.muscle===muscle),recent=matches.find(x=>x.prioritized)||matches[0];
- const setCount=week.tally[muscle]>=8?2:3;
- return {id:'plan-'+muscle+'-'+t.day,muscle,name:recent?.name||DEFAULTS[muscle],weight:recent?.weight??0,reps:recent?.reps??(muscle==='脚（前）'||muscle==='脚（後）・臀部'?12:10),sets:setCount,source:recent?'logged':'sample'};
- })}));
- return {sourceWeek:from,nextWeek:next,days,saved:false,sourceSessions:week.sessions};}
-return {MUSCLES,DEFAULTS,TEMPLATES,cleanExercise,cleanWorkout,cleanWorkouts,cleanPlan,makePlan,getWeekStats,monday,shift};
+function makePlan(workouts,sourceWeek){
+ const from=monday(sourceWeek),next=shift(from,7),{week,items}=weeklyInventory(workouts,from);
+ const empty={sourceWeek:from,nextWeek:next,days:[],saved:false,sourceSessions:week.sessions,sourceExerciseCount:0,omitted:0};
+ if(!items.length)return empty;
+ // Use at most 8 exercises per session. Where few unique movements were recorded,
+ // repeat only those movements with a recovery day between sessions.
+ const selected=items.sort((a,b)=>b.weeklySets-a.weeklySets||MUSCLES.indexOf(a.muscle)-MUSCLES.indexOf(b.muscle)||a.name.localeCompare(b.name,'ja')).slice(0,24);
+ const n=selected.length, frequency=n<=3?3:n<=12?2:1;
+ const groups=[[],[],[]];
+ for(const ex of selected){
+  const choices=frequency===3?[[0,1,2]]:frequency===2?[[0,2],[0,1],[1,2]]:[[0],[1],[2]];
+  let best=null,bestScore=Infinity;
+  for(const slots of choices){
+   if(slots.some(i=>groups[i].length>=8))continue;
+   // Spread sessions evenly; avoid overloading one day with the same muscle group.
+   let score=0;
+   for(const i of slots){const muscleCount=groups[i].filter(x=>x.muscle===ex.muscle).length;score+=groups[i].length*12+muscleCount*9;}
+   // Mon/Fri offers more spacing for twice-weekly work, if equally balanced.
+   if(frequency===2&&slots[0]===0&&slots[1]===2)score-=1;
+   if(score<bestScore){bestScore=score;best=slots;}
+  }
+  if(!best)continue;
+  for(const i of best)groups[i].push({id:'plan-'+i+'-'+ex.id,muscle:ex.muscle,name:ex.name,weight:ex.weight,reps:ex.reps,sets:ex.sets,source:'previous-week'});
+ }
+ // For 13–24 distinct exercises, distribute them over 3 days. Always at least 1 per day.
+ return {sourceWeek:from,nextWeek:next,days:TEMPLATES.map((t,i)=>({date:shift(next,t.day),label:t.label,exercises:groups[i]})),saved:false,sourceSessions:week.sessions,sourceExerciseCount:items.length,omitted:items.length-selected.length};
+}
+return {MUSCLES,TEMPLATES,cleanExercise,cleanWorkout,cleanWorkouts,cleanPlan,makePlan,isPlanGrounded,weeklyInventory,getWeekStats,monday,shift};
 });
 </script><script>(function () {
 'use strict';
@@ -355,7 +391,7 @@ function sanitize(raw){
  st.entries=cleanEntries(raw.entries);st.foods=cleanFoods(raw.foods);
  st.workouts=Training.cleanWorkouts(raw.workouts,iso());
  if(raw.trainingPlans&&typeof raw.trainingPlans==='object'&&!Array.isArray(raw.trainingPlans))for(const [week,plan] of Object.entries(raw.trainingPlans)){
-  const cleaned=Training.cleanPlan(plan);if(cleaned&&week===cleaned.sourceWeek)st.trainingPlans[week]=cleaned;
+  const cleaned=Training.cleanPlan(plan);if(cleaned&&week===cleaned.sourceWeek&&Training.isPlanGrounded(cleaned,st.workouts))st.trainingPlans[week]=cleaned;
  }
  return st;
 }
@@ -599,11 +635,11 @@ function addWorkoutExercise(){const ex=readExercise();if(!ex)return toast('部�
  $('exercise-name').value='';$('exercise-weight').value='';$('exercise-reps').value='';$('exercise-name').focus();}
 async function saveWorkout(){const date=$('workout-date').value;if(!validDay(date)||date>iso())return toast('過去または今日の日付を選んでください');if(!/^([01]\d|2[0-3]):[0-5]\d$/.test($('workout-time').value))return toast('時間を選択してください');if(!workoutDraft.length)return toast('まず種目を1つ以上追加してください');
  const data=Training.cleanWorkout({id:editingWorkout||id(),date,time:$('workout-time').value,gym:$('workout-gym').value,note:$('workout-note').value,exercises:workoutDraft},iso());if(!data)return toast('種目の内容を確認してください');
- if(editingWorkout){const idx=state.workouts.findIndex(w=>w.id===editingWorkout);if(idx<0)return toast('編集する記録が見つかりません');state.workouts[idx]=data;}else state.workouts.push(data);
+ if(editingWorkout){const idx=state.workouts.findIndex(w=>w.id===editingWorkout);if(idx<0)return toast('編集する記録が見つかりません');delete state.trainingPlans[weekStart(state.workouts[idx].date)];state.workouts[idx]=data;}else state.workouts.push(data);delete state.trainingPlans[weekStart(data.date)];
  state.workouts.sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));trainingDraftPlan=null;await save();resetWorkoutEditor();renderTraining();toast('筋トレを保存しました');}
 function editWorkout(w){editingWorkout=w.id;workoutDraft=w.exercises.map(x=>({...x}));$('workout-heading').textContent='トレーニングを編集';$('workout-save').textContent='編集した筋トレを保存';$('workout-cancel').classList.remove('hidden');
  $('workout-date').value=w.date;$('workout-time').value=w.time;$('workout-gym').value=w.gym;$('workout-note').value=w.note;renderWorkoutDraft();$('workout-heading').scrollIntoView({behavior:'smooth',block:'start'});}
-async function deleteWorkout(w){if(!confirm(`${w.date} の筋トレ記録を削除しますか？`))return;state.workouts=state.workouts.filter(x=>x.id!==w.id);if(editingWorkout===w.id)resetWorkoutEditor();trainingDraftPlan=null;await save();renderTraining();toast('筋トレ記録を削除しました');}
+async function deleteWorkout(w){if(!confirm(`${w.date} の筋トレ記録を削除しますか？`))return;state.workouts=state.workouts.filter(x=>x.id!==w.id);delete state.trainingPlans[weekStart(w.date)];if(editingWorkout===w.id)resetWorkoutEditor();trainingDraftPlan=null;await save();renderTraining();toast('筋トレ記録を削除しました');}
 function renderWorkoutHistory(){const month=$('workout-history-month').value,workouts=state.workouts.filter(w=>!month||w.date.startsWith(month)).sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));$('workout-count').textContent=`${workouts.length}/${state.workouts.length}回`;
  const root=$('workout-history');root.innerHTML='';if(!workouts.length){root.innerHTML='<p class="blank-note">まだ該当する筋トレ記録はありません。</p>';return;}
  for(const w of workouts.slice(0,60)){const item=document.createElement('div');item.className='session-card';const title=document.createElement('div');title.className='session-title';title.textContent=`${w.date} ${w.time}　${w.gym||'店舗未入力'}`;
@@ -611,19 +647,32 @@ function renderWorkoutHistory(){const month=$('workout-history-month').value,wor
  item.append(title,sub);for(const ex of w.exercises){const row=document.createElement('div');row.className='session-meta';row.textContent=`${ex.muscle}｜${ex.name||'種目名なし'}：${ex.weight}kg × ${ex.reps}回 × ${ex.sets}セット`;item.append(row);}
  const actions=document.createElement('div');actions.className='item-actions margin-top';const edit=document.createElement('button');edit.type='button';edit.textContent='編集';edit.onclick=()=>editWorkout(w);const del=document.createElement('button');del.type='button';del.className='delete';del.textContent='削除';del.onclick=()=>deleteWorkout(w);actions.append(edit,del);item.append(actions);root.append(item);}
 }
-function activeTrainingPlan(){return trainingDraftPlan||state.trainingPlans[trainingWeek]||Training.makePlan(state.workouts,trainingWeek);}
-function renderTrainingPlan(){const p=activeTrainingPlan(),root=$('training-plan');root.innerHTML='';const hint=document.createElement('p');hint.className='subtext';hint.textContent=`対象：${p.nextWeek} からの週（${p.saved?'保存済み':'自動提案・未保存'}）。同じ筋群には休息を確保。`;
- root.append(hint);for(const day of p.days){const card=document.createElement('div');card.className='plan-day';const heading=document.createElement('h3');heading.textContent=`${day.date}｜${day.label}`;card.append(heading);
- for(const ex of day.exercises){const line=document.createElement('div');line.className='plan-exercise';line.innerHTML=`<strong>${esc(ex.muscle)}</strong>　${esc(ex.name||'種目名未設定')}<div class="plan-note">${ex.weight>0?ex.weight+'kg（前回目安）':'重量は自分で設定'} ・ ${ex.reps}回 × ${ex.sets}セット${ex.source==='sample'?' ・ 初期例':''}</div>`;card.append(line);}root.append(card);}
+function activeTrainingPlan(){const previous=state.trainingPlans[trainingWeek];if(trainingDraftPlan&&Training.isPlanGrounded(trainingDraftPlan,state.workouts))return trainingDraftPlan;if(previous&&Training.isPlanGrounded(previous,state.workouts))return previous;return Training.makePlan(state.workouts,trainingWeek);}
+function renderTrainingPlan(){
+ const p=activeTrainingPlan(),root=$('training-plan');root.innerHTML='';
+ const usable=Training.weeklyInventory(state.workouts,trainingWeek).items.length>0;
+ $('training-save-plan').disabled=!usable;
+ const hint=document.createElement('p');hint.className='subtext';
+ hint.textContent=`対象：${p.nextWeek} からの週（${p.saved?'保存済み':'自動提案・未保存'}）。${usable?'選択した週に実際に行った種目のみを使用。':'前の週の実績がないためメニューは作成しません。'}`;
+ root.append(hint);
+ if(!usable){const notice=document.createElement('p');notice.className='blank-note';notice.textContent='この週に筋トレを記録すると、その種目だけで翌週の月・水・金のメニューを組みます。機種の自動追加はしません。';root.append(notice);return;}
+ const itemCount=Training.weeklyInventory(state.workouts,trainingWeek).items.length;
+ const info=document.createElement('p');info.className='subtext';info.textContent=`前週の記録：${itemCount}種類。${itemCount>24?'最大24種類を採用（1日8種類まで）。':'直近の重さ・回数・セット数を参考表示します。'}`;root.append(info);
+ for(const day of p.days){
+  const card=document.createElement('div');card.className='plan-day';const heading=document.createElement('h3');
+  const muscles=[...new Set(day.exercises.map(ex=>ex.muscle))].join('・');
+  heading.textContent=`${day.date}｜${day.label}${muscles?'（'+muscles+'）':''}`;card.append(heading);
+  for(const ex of day.exercises){const line=document.createElement('div');line.className='plan-exercise';line.innerHTML=`<strong>${esc(ex.muscle)}</strong>　${esc(ex.name||'名称未入力の種目')}<div class="plan-note">${ex.weight>0?ex.weight+'kg（前週の目安）':'0kg（前週の記録）'} ・ ${ex.reps}回 × ${ex.sets}セット</div>`;card.append(line);}root.append(card);
+ }
 }
 function renderTraining(){if(!trainingWeek)trainingWeek=weekStart(iso());renderWorkoutHistory();const stat=Training.getWeekStats(state.workouts,trainingWeek);const end=Training.shift(trainingWeek,6);
  $('training-week-label').textContent=`${nice(trainingWeek)}〜${nice(end)} の実績`;
  const summary=Object.entries(stat.tally).sort((a,b)=>b[1]-a[1]).map(([m,n])=>`${m}${n}セット`).join('、');
- $('training-week-stats').textContent=`筋トレ ${stat.sessions}回 / ${stat.sets}セット${summary?' ｜ 部位：'+summary:' ｜ この週の記録なし（過去の履歴か初期例から提案）'}`;
+ $('training-week-stats').textContent=`筋トレ ${stat.sessions}回 / ${stat.sets}セット${summary?' ｜ 部位：'+summary:' ｜ この週の記録なし（提案の自動補完はしません）'}`;
  renderTrainingPlan();}
 function moveTrainingWeek(n){trainingWeek=Training.shift(trainingWeek,n*7);trainingDraftPlan=null;renderTraining();}
-function generateTrainingPlan(){trainingDraftPlan=Training.makePlan(state.workouts,trainingWeek);renderTrainingPlan();toast('今の記録を元に次週プランを再作成しました');}
-async function saveTrainingPlan(){const p=activeTrainingPlan();state.trainingPlans[trainingWeek]={sourceWeek:p.sourceWeek,nextWeek:p.nextWeek,days:p.days,saved:true};trainingDraftPlan=null;await save();renderTrainingPlan();toast('翌週の3回分のプランを保存しました');}
+function generateTrainingPlan(){trainingDraftPlan=Training.makePlan(state.workouts,trainingWeek);renderTrainingPlan();toast(trainingDraftPlan.days.length?'この週に行った種目だけで次週プランを再作成しました':'この週の筋トレ記録がないため提案できません');}
+async function saveTrainingPlan(){const p=activeTrainingPlan();if(!Training.isPlanGrounded(p,state.workouts))return toast('前週に記録された種目がないため保存できません');state.trainingPlans[trainingWeek]={sourceWeek:p.sourceWeek,nextWeek:p.nextWeek,days:p.days,saved:true};trainingDraftPlan=null;await save();renderTrainingPlan();toast('前週にやった種目だけで組んだ3回分のプランを保存しました');}
 
 function wire(){
  $('lock-form').addEventListener('submit',async e=>{e.preventDefault();$('lock-error').textContent='';$('lock-submit').disabled=true;$('lock-submit').textContent='確認中…';try{await unlock($('pin-field').value,$('pin-confirm').value);}catch(error){$('lock-error').textContent=error.message;console.warn('ロック解除できませんでした');}finally{$('lock-submit').disabled=false;$('lock-submit').textContent=setupMode?'設定して始める':'ロック解除';}});
