@@ -1,3 +1,23 @@
 {
- "id":"./", "name":"代謝ログ - 消費カロリーと食事の管理", "short_name":"代謝ログ", "description":"毎食PFCと週平均目標、体重変化から消費カロリーを推定する個人用アプリ", "start_url":"./", "scope":"./", "display":"standalone", "background_color":"#f6f8fb", "theme_color":"#0b4d48", "icons":[{"src":"./icon-192.png","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png","sizes":"512x512","type":"image/png"}]
+  "id": "./",
+  "name": "代謝ログ - 食事・体重・筋トレの管理",
+  "short_name": "代謝ログ",
+  "description": "食事とPFC、消費カロリー推定、筋トレ記録と翌週3回メニュー提案",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#0b4d48",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
