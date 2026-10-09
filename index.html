@@ -1,9 +1,9 @@
 <!doctype html><html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <meta name="theme-color" content="#0b4d48"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="代謝ログ" />
-<meta name="description" content="過去の体重・毎食のPFCと週平均カロリー目標を記録し、消費カロリーを推定" />
+<meta name="description" content="体重・毎食PFC・筋トレを記録し、消費カロリーと次週のトレーニングを提案" />
 <link rel="manifest" href="./manifest.webmanifest"/><link rel="apple-touch-icon" href="./icon-192.png"/>
-<title>代謝ログ v3.1</title><style>:root{--bg:#f6f8fb;--paper:#fff;--ink:#142638;--soft:#69798b;--line:#e6eaf0;--primary:#14766c;--primary-dark:#0b4d48;--mint:#e7f7f2;--blue:#edf2ff;--orange:#fff4e5;--red:#b84643;--radius:18px;--shadow:0 5px 22px rgba(23,42,63,.045)}
+<title>代謝ログ v4.0</title><style>:root{--bg:#f6f8fb;--paper:#fff;--ink:#142638;--soft:#69798b;--line:#e6eaf0;--primary:#14766c;--primary-dark:#0b4d48;--mint:#e7f7f2;--blue:#edf2ff;--orange:#fff4e5;--red:#b84643;--radius:18px;--shadow:0 5px 22px rgba(23,42,63,.045)}
 *{box-sizing:border-box}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-size:15px;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #7fc6bd;outline-offset:2px}.app{max-width:600px;margin:0 auto;padding:26px 19px 108px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.brand{display:flex;align-items:center;gap:11px}.brand-symbol{background:var(--primary-dark);color:white;border-radius:15px;width:43px;height:43px;display:grid;place-items:center;font-size:24px;font-weight:650}.brand-title{font-weight:800;letter-spacing:.015em;font-size:18px}.brand-sub{color:var(--soft);font-size:11px;margin-top:2px}.date-tag{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px;color:var(--soft);font-size:12px;white-space:nowrap}h1,h2,h3,p{margin-top:0}h1{font-size:25px;letter-spacing:-.035em;margin-bottom:7px}h2{font-size:17px;letter-spacing:-.025em}p{line-height:1.65}.eyebrow{font-size:11px;letter-spacing:.1em;font-weight:800;color:#81909e}.subtext{font-size:13px;color:var(--soft)}.hero{border-radius:24px;padding:24px;background:linear-gradient(135deg,#123d43,#0e645a 68%,#187867);color:#fff;box-shadow:0 12px 28px rgba(11,77,72,.13);position:relative;overflow:hidden}.hero:after{content:'';position:absolute;right:-52px;top:-78px;border:38px solid rgba(255,255,255,.045);height:180px;width:180px;border-radius:50%;pointer-events:none}.hero-head{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#d6f3eb;font-size:13px}.state-pill{padding:6px 10px;font-size:11px;background:rgba(255,255,255,.14);border-radius:100px;white-space:nowrap}.big-number{font-size:51px;font-weight:800;line-height:1.18;letter-spacing:-.065em;margin:16px 0 8px;font-variant-numeric:tabular-nums}.big-number small{font-size:17px;font-weight:550;letter-spacing:0;margin-left:6px}.hero-desc{font-size:12px;color:#d1eae4;max-width:410px;line-height:1.65;min-height:20px;margin:0}.hero-footer{border-top:1px solid rgba(255,255,255,.18);margin-top:19px;padding-top:16px;display:flex;justify-content:space-between;gap:12px}.hero-metric small{display:block;color:#bce1da;font-size:11px;margin-bottom:4px}.hero-metric strong{font-size:21px;letter-spacing:-.03em}.hero-metric:last-child{text-align:right}.section{margin-top:23px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}.section-title h2{margin:0}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}.progress-head{display:flex;justify-content:space-between;align-items:center;gap:9px;margin-bottom:10px}.progress-bar{height:8px;background:#e7ecef;border-radius:100px;overflow:hidden}.progress-fill{background:#18a48b;height:100%;border-radius:100px;transition:width .3s}.muted{color:var(--soft)}.small{font-size:12px}.subtle-note{font-size:12px;color:var(--soft);margin-top:10px;margin-bottom:0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:flex;flex-direction:column;gap:8px}.field label{font-size:12px;font-weight:750;color:#506476}.input-shell{display:flex;align-items:center;gap:8px;border:1px solid #dce2e9;border-radius:12px;padding:0 12px;background:white;min-height:49px}.input-shell input,.input-shell select{border:0;outline:0;min-width:0;width:100%;height:46px;background:transparent;color:var(--ink);font-weight:650;font-size:17px;appearance:none}.input-shell span{font-size:12px;color:#85939f;flex-shrink:0}.input-shell:focus-within{border-color:#6dbfb4;box-shadow:0 0 0 3px #e2f5f0}.date-input{font-size:14px!important}.form-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.btn{border:0;border-radius:12px;padding:13px 16px;font-size:14px;font-weight:800;min-height:46px;background:var(--primary);color:#fff}.btn:hover{filter:brightness(.95)}.btn.secondary{background:var(--mint);color:var(--primary-dark)}.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn.danger{background:#fff0ef;color:var(--red)}.btn.full{width:100%;margin-top:14px}.btn.tiny{min-height:34px;padding:7px 11px;font-size:12px}.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.stat-item{padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}.stat-label{font-size:12px;color:var(--soft);margin-bottom:9px}.stat-val{font-size:22px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}.stat-val small{font-size:12px;font-weight:500;color:var(--soft)}.chart-wrap{height:190px;width:100%;position:relative}.chart-wrap svg{width:100%;height:100%;display:block;overflow:visible}.empty-chart{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center;color:var(--soft);font-size:12px;gap:9px}.empty-icon{font-size:29px;filter:grayscale(.3)}.menu{position:fixed;bottom:0;left:0;right:0;z-index:40;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:9px max(14px,calc((100vw - 570px)/2)) max(12px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr)}.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;border-radius:12px;padding:9px 3px;color:#8a98a6;font-size:10px;font-weight:750;min-height:55px}.nav-item svg{width:22px;height:22px}.nav-item.active{background:var(--mint);color:var(--primary-dark)}.tab{display:none}.tab.active{display:block}.history-item{padding:13px 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #edf0f3;gap:10px}.history-item:last-child{border:0}.history-date{font-size:13px;font-weight:750}.history-details{font-size:12px;color:var(--soft);margin-top:5px}.history-edit{background:#edf7f4;border:0;border-radius:10px;padding:8px 12px;color:var(--primary-dark);font-weight:800;font-size:12px}.help-list{margin:10px 0 0;padding-left:21px;color:var(--soft);font-size:13px;line-height:1.8}.nudge{background:#f0f8f6;border:1px solid #d7eee7;color:#22574f;font-size:12px;border-radius:12px;padding:12px;line-height:1.65}.alert{background:#fff4ea;border:1px solid #f4dec8;color:#805831;font-size:12px;border-radius:12px;padding:12px;line-height:1.65}.button-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}.button-row .btn{flex:1}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.setting-row:last-child{border:0}.setting-desc{font-size:12px;color:var(--soft);margin-top:4px}.toast{position:fixed;left:50%;bottom:94px;transform:translateX(-50%) translateY(12px);background:#1b3332;color:white;border-radius:13px;padding:12px 18px;opacity:0;pointer-events:none;transition:.2s;z-index:80;font-weight:650;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.footer{color:#94a0ac;font-size:11px;text-align:center;line-height:1.7;margin-top:25px}.text-link{font-size:12px;color:var(--primary);font-weight:750;text-decoration:none;background:none;border:none;padding:0}.today-label{color:var(--soft);font-size:13px;margin-bottom:18px}.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.chip{font-size:11px;background:#f4f6fa;color:#63748a;padding:7px 9px;border-radius:100px}.annotation{font-size:12px;color:var(--soft);margin-top:8px}.hdivider{height:1px;background:var(--line);margin:17px 0}.mini-select{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px;color:var(--ink)}.tab-heading{margin-bottom:20px}.hidden{display:none!important}@media(max-width:380px){.app{padding:20px 14px 110px}.big-number{font-size:45px}.hero{padding:20px}.stat-val{font-size:19px}}@media(min-width:820px){.app{padding-top:36px}.menu{max-width:580px;margin:auto;border:1px solid var(--line);border-radius:19px 19px 0 0}}
 /* v2 enhancements */
 body.locked #app-root,body.locked #bottom-nav{visibility:hidden}
@@ -43,10 +43,22 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
 .food-direct-controls h3{font-size:14px;margin-bottom:5px}.food-direct-controls p{margin-bottom:12px}.food-direct-controls .fields{gap:9px}
 .food-direct-controls input{font-size:13px;min-width:0;width:100%}.food-direct-controls .input-shell{padding-left:7px;padding-right:7px}
 @media(max-width:360px){.food-direct-controls .fields{grid-template-columns:1fr}}
+/* v4 training, food search, fast reuse, cooked rice */
+.menu{display:flex;grid-template-columns:none;gap:1px;padding-left:max(4px,calc((100vw - 590px)/2));padding-right:max(4px,calc((100vw - 590px)/2));overflow-x:auto;justify-content:space-around}.nav-item{flex:1 1 0;min-width:0;font-size:10px;white-space:nowrap}.nav-emoji{font-size:20px}.app{padding-bottom:118px}
+.rice-presets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.rice-presets button{border:1px solid #cce5dc;border-radius:12px;padding:10px 5px;background:#f1faf5;font-weight:800;color:var(--primary-dark)}.rice-presets button.selected{background:#14766c;color:white}.rice-preview{margin-top:14px;padding:13px;background:#eff7f6;border-radius:11px;font-weight:800;color:#12645b;font-size:13px}
+.compact-food-list{margin-top:14px}.compact-food{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}.compact-food:last-child{border:0}.compact-food .food-name{font-weight:800;font-size:13px}.compact-food .food-detail{color:var(--soft);font-size:11px;margin-top:5px}.compact-food button{border:1px solid #cce5dc;background:#f2faf6;border-radius:10px;color:#0d6c62;padding:9px 11px;white-space:nowrap;font-weight:800;font-size:12px}
+.chatgpt-shortcut{background:#f7fbfc}.chat-link{display:block;text-decoration:none;text-align:center;width:100%;margin-top:8px}
+.triple-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.triple-fields .input-shell{padding:0 7px}.triple-fields .input-shell input{font-size:15px}.draft-heading{margin-top:22px;display:flex;justify-content:space-between;color:#4e6674;font-size:12px;font-weight:800}.draft-heading span{color:var(--primary)}
+.workout-draft{border:1px solid #e6ebee;border-radius:12px;margin-top:9px;overflow:hidden}.draft-exercise{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px;border-bottom:1px solid var(--line)}.draft-exercise:last-child{border-bottom:0}.draft-exercise strong{font-size:13px}.draft-exercise p{font-size:11px;color:var(--soft);margin:4px 0 0}.draft-exercise button{border:0;background:#fff0f0;color:#ae3c38;border-radius:9px;padding:7px 10px}
+.session-card{border-top:1px solid var(--line);padding:13px 0}.session-card:first-child{border:0}.session-title{font-weight:800;font-size:13px}.session-meta{font-size:11px;color:var(--soft);margin-top:5px}.muscle-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.muscle-tag{background:#e9f5f1;color:#086e60;padding:5px 7px;border-radius:7px;font-size:11px;font-weight:800}.training-plan{margin-top:14px}.plan-day{border:1px solid #dae8e5;border-radius:14px;padding:14px 12px;margin-top:11px;background:#fbfefd}.plan-day h3{font-size:15px;margin:0 0 9px}.plan-exercise{border-top:1px solid #eef1f2;padding:9px 0;font-size:12px}.plan-exercise:first-of-type{border:0}.plan-exercise strong{color:var(--primary-dark)}.plan-note{font-size:11px;color:var(--soft);margin-top:3px}.blank-note{font-size:12px;color:var(--soft);padding:13px 0}
+@media(max-width:380px){.app{padding:20px 13px 125px}.nav-item{font-size:9px;letter-spacing:-.03em}.nav-emoji{font-size:18px}.triple-fields .field label{font-size:10px}}
+.fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fields .input-shell{min-width:0;max-width:100%;overflow:hidden}
+.fields input[type="date"],.fields input[type="time"]{min-width:0;max-width:100%;font-size:13px}
 </style>
 </head><body class="locked">
 <div id="lock-screen" class="lock-screen"><div class="lock-card">
-  <div class="lock-symbol">↗</div><div class="eyebrow">METABOLOG 3.1</div><h1 id="lock-title">パスコードを入力</h1>
+  <div class="lock-symbol">↗</div><div class="eyebrow">METABOLOG 4.0</div><h1 id="lock-title">パスコードを入力</h1>
   <p class="subtext" id="lock-desc">この端末の記録を開くためのパスコードを入力してください。</p>
   <form id="lock-form"><label class="sr-only" for="pin-field">6桁のパスコード</label><input id="pin-field" autocomplete="off" type="password" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" placeholder="6桁のパスコード" required/>
   <div id="pin-confirm-wrap" class="hidden"><label class="sr-only" for="pin-confirm">確認用パスコード</label><input id="pin-confirm" autocomplete="off" type="password" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" placeholder="もう一度入力"/></div>
@@ -55,7 +67,7 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
   <p class="subtle-note">このPINは端末内のデータ保護用です。GitHub Pages自体へのアクセス制限ではありません。パスコードを忘れると暗号化したデータは復元できません。</p>
 </div></div>
 <div class="app" id="app-root" aria-hidden="true">
-  <header class="topbar"><div class="brand"><div class="brand-symbol" aria-hidden="true">↗</div><div><div class="brand-title">代謝ログ <span class="version">v3.1</span></div><div class="brand-sub">MY ENERGY TRACKER</div></div></div><button type="button" class="top-lock" id="lock-now" aria-label="アプリをロック">🔒 ロック</button></header>
+  <header class="topbar"><div class="brand"><div class="brand-symbol" aria-hidden="true">↗</div><div><div class="brand-title">代謝ログ <span class="version">v4.0</span></div><div class="brand-sub">MY ENERGY TRACKER</div></div></div><button type="button" class="top-lock" id="lock-now" aria-label="アプリをロック">🔒 ロック</button></header>
   <main>
     <section class="tab active" data-page="dashboard"><div class="tab-heading"><h1>今日のダッシュボード</h1><p class="subtext" id="now-date">今日</p></div>
       <div class="hero"><div class="hero-head"><strong>推定消費カロリー（1日）</strong><span class="state-pill" id="badge">初期設定値</span></div>
@@ -78,6 +90,20 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
         <div class="hdivider"></div><h2>この日の集計</h2><div class="record-summary" id="daily-summary">—</div><label class="checkline"><input type="checkbox" id="day-complete">この日の食事記録はすべて完了した</label><p class="subtle-note">消費カロリーの推定には、「完了」にした過去の14日連続分を使います。途中まで記録した日は対象外です。</p>
       </div>
       <div class="section card"><h2>よく食べるものから直接入力</h2><p class="subtext">食品メモに登録したものを選び、選択中の日付へワンタップで追加できます。</p><div class="input-shell"><select id="food-choice" aria-label="食品メモを選択"><option value="">登録した食品を選ぶ</option></select></div><div class="field margin-top"><label for="quick-category">どの食事として記録する？</label><div class="input-shell"><select id="quick-category"><option>朝食</option><option>昼食</option><option>夕食</option><option>間食</option><option>飲み物</option><option>その他</option></select></div></div><button type="button" class="btn secondary full" id="quick-add-food" disabled>選んだ食品をこの日の食事に追加</button><p class="subtle-note" id="quick-food-hint">食品メモを登録するとここから追加できます。</p></div>
+
+      <div class="section card"><div class="section-title"><h2>お米をすぐに追加</h2><span class="eyebrow">炊いた白米</span></div>
+        <p class="subtext">炊飯後の重さを入力するだけ。おかずは下の食事入力・食品メモから追加してね。</p>
+        <div class="rice-presets" id="rice-presets"><button type="button" data-rice="100">100g</button><button type="button" data-rice="110">110g</button><button type="button" data-rice="150">150g</button><button type="button" data-rice="200">200g</button></div>
+        <div class="fields margin-top"><div class="field"><label for="rice-grams">ご飯の重さ（炊飯後）</label><div class="input-shell"><input type="number" id="rice-grams" min="1" max="1000" step="1" value="110" inputmode="numeric"><span>g</span></div></div>
+        <div class="field"><label for="rice-category">区分</label><div class="input-shell"><select id="rice-category"><option>朝食</option><option>昼食</option><option>夕食</option><option>間食</option><option>その他</option></select></div></div></div>
+        <div id="rice-preview" class="rice-preview" aria-live="polite"></div><button type="button" class="btn secondary full" id="rice-add">この日の食事にお米を追加</button>
+        <p class="subtle-note">白米（炊飯後）100gあたり156kcal、P2.5g・F0.3g・C37.1gを基準。ご飯の種類により変わります。</p>
+      </div>
+      <div class="section card"><div class="section-title"><h2>最近食べたものを再入力</h2><span class="small muted">最近の10種類</span></div><p class="subtext">食べた履歴から、同じカロリー・PFCを選択中の日付にコピー。</p>
+        <div class="field"><label for="recent-category">追加する食事区分</label><div class="input-shell"><select id="recent-category"><option>朝食</option><option selected>昼食</option><option>夕食</option><option>間食</option><option>飲み物</option><option>その他</option></select></div></div>
+        <div id="recent-list" class="compact-food-list"></div>
+      </div>
+      <div class="section card chatgpt-shortcut"><div class="section-title"><h2>写真からカロリーを調べる</h2></div><p class="subtext">推定しにくい食事はChatGPTへ移動して写真を送れます。推定値を確認したら、この画面に戻って入力してね。</p><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="btn chat-link">ChatGPTを開く ↗</a></div>
       <div class="section card"><div class="section-title"><h2 id="meal-heading">食事を追加</h2><button type="button" class="text-link hidden" id="cancel-edit">編集をやめる</button></div>
         <form id="meal-form"><div class="fields"><div class="field"><label for="meal-category">区分</label><div class="input-shell"><select id="meal-category"><option>朝食</option><option>昼食</option><option>夕食</option><option>間食</option><option>飲み物</option><option>その他</option></select></div></div><div class="field"><label for="meal-name">食事名（任意）</label><div class="input-shell"><input type="text" id="meal-name" maxlength="80" placeholder="ラーメンなど"></div></div></div>
           <div class="field margin-top"><label for="meal-cal">カロリー（必須）</label><div class="input-shell"><input type="number" id="meal-cal" min="0" max="10000" step="1" inputmode="numeric" placeholder="650" required><span>kcal</span></div></div>
@@ -106,7 +132,27 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
           <div class="macro-inputs"><div class="field"><label for="food-p">P</label><div class="input-shell"><input id="food-p" type="number" min="0" max="1000" step="0.1" inputmode="decimal" placeholder="任意"><span>g</span></div></div><div class="field"><label for="food-f">F</label><div class="input-shell"><input id="food-f" type="number" min="0" max="1000" step="0.1" inputmode="decimal" placeholder="任意"><span>g</span></div></div><div class="field"><label for="food-c">C</label><div class="input-shell"><input id="food-c" type="number" min="0" max="1000" step="0.1" inputmode="decimal" placeholder="任意"><span>g</span></div></div><div class="field"><label for="food-alcohol">アルコール</label><div class="input-shell"><input id="food-alcohol" type="number" min="0" max="500" step="0.1" inputmode="decimal" placeholder="任意"><span>g</span></div></div></div>
           <div class="macro-calculator"><p id="food-cal-preview" class="subtle-note" aria-live="polite">PFC・アルコールを入力すると推定値を表示します。</p><button type="button" class="btn secondary full" id="calc-food-cal">PFCからkcalを概算して入力</button><p class="subtle-note">P 4 kcal/g、F 9 kcal/g、C 4 kcal/g、純アルコール 7 kcal/gで概算。食品表示のカロリーが分かる場合は、その数値を優先できます。</p></div><button type="submit" class="btn full margin-top" id="food-save">食品メモを保存</button></form>
       </div>
-      <div class="section card"><div class="section-title"><h2>登録済みの食品</h2><span id="food-count" class="small muted">0件</span></div><div class="food-direct-controls"><h3>食事に直接追加する</h3><p class="subtext">ここで日付・区分を選び、各食品の「この食品を食事に追加」を押すだけで記録に保存されます。</p><div class="fields"><div class="field"><label for="food-direct-date">記録する日付</label><div class="input-shell"><input id="food-direct-date" type="date" aria-label="食品メモから記録する日付"></div></div><div class="field"><label for="food-direct-category">食事区分</label><div class="input-shell"><select id="food-direct-category"><option>朝食</option><option selected>昼食</option><option>夕食</option><option>間食</option><option>飲み物</option><option>その他</option></select></div></div></div></div><div id="food-list"></div></div>
+      <div class="section card"><div class="section-title"><h2>登録済みの食品</h2><span id="food-count" class="small muted">0件</span></div><div class="field"><label for="food-search">食品メモを検索</label><div class="input-shell"><input id="food-search" type="search" placeholder="名前で検索（例：ネギトロ・納豆）" autocomplete="off"></div></div><div class="food-direct-controls"><h3>食事に直接追加する</h3><p class="subtext">ここで日付・区分を選び、各食品の「この食品を食事に追加」を押すだけで記録に保存されます。</p><div class="fields"><div class="field"><label for="food-direct-date">記録する日付</label><div class="input-shell"><input id="food-direct-date" type="date" aria-label="食品メモから記録する日付"></div></div><div class="field"><label for="food-direct-category">食事区分</label><div class="input-shell"><select id="food-direct-category"><option>朝食</option><option selected>昼食</option><option>夕食</option><option>間食</option><option>飲み物</option><option>その他</option></select></div></div></div></div><div id="food-list"></div></div>
+    </section>
+
+    <section class="tab" data-page="training"><div class="tab-heading"><h1>筋トレ記録</h1><p class="subtext">鍛えた部位を中心に、種目・重量・回数・セット数を記録。履歴から翌週の週3プランを提案します。</p></div>
+      <div class="card"><div class="section-title"><h2 id="workout-heading">トレーニングを記録</h2><button type="button" class="text-link hidden" id="workout-cancel">編集をやめる</button></div>
+        <div class="fields"><div class="field"><label for="workout-date">日付</label><div class="input-shell"><input type="date" id="workout-date" class="date-input"></div></div><div class="field"><label for="workout-time">開始時間</label><div class="input-shell"><input type="time" id="workout-time" value="18:00"></div></div></div>
+        <div class="field margin-top"><label for="workout-gym">店舗（自由入力）</label><div class="input-shell"><input type="text" id="workout-gym" maxlength="90" placeholder="例：○○ジム 天王寺店"></div></div>
+        <div class="field margin-top"><label for="workout-note">ひとことメモ（任意）</label><div class="input-shell"><input type="text" id="workout-note" maxlength="200" placeholder="疲労感・フォーム・調子など"></div></div>
+        <div class="hdivider"></div><h3>鍛えた部位と種目</h3><p class="subtext">部位が必須。種目名は空欄でもOK。1セットごとではなく「同じ重量×回数×セット数」を1行で登録します。</p>
+        <div class="fields"><div class="field"><label for="exercise-muscle">鍛えた部位</label><div class="input-shell"><select id="exercise-muscle"></select></div></div><div class="field"><label for="exercise-name">種目名（任意）</label><div class="input-shell"><input id="exercise-name" maxlength="60" placeholder="チェストプレス"></div></div></div>
+        <div class="triple-fields margin-top"><div class="field"><label for="exercise-weight">重さ（kg）</label><div class="input-shell"><input id="exercise-weight" type="number" inputmode="decimal" min="0" max="1000" step="0.5" placeholder="40"></div></div><div class="field"><label for="exercise-reps">回数 / セット</label><div class="input-shell"><input id="exercise-reps" type="number" inputmode="numeric" min="1" max="100" step="1" placeholder="10"></div></div><div class="field"><label for="exercise-sets">セット数</label><div class="input-shell"><input id="exercise-sets" type="number" inputmode="numeric" min="1" max="15" step="1" value="3"></div></div></div>
+        <button type="button" class="btn secondary full" id="exercise-add">＋ 種目を今回のメニューに追加</button>
+        <div class="draft-heading">今回のメニュー（保存前） <span id="draft-exercise-count">0種目</span></div><div id="workout-draft" class="workout-draft"></div>
+        <button type="button" class="btn full" id="workout-save">この日の筋トレを保存</button>
+      </div>
+      <div class="section card"><div class="section-title"><h2>筋トレ履歴</h2><span class="small muted" id="workout-count">0回</span></div><div class="history-control-row"><input type="month" id="workout-history-month" aria-label="筋トレ履歴の月を指定"><button type="button" id="workout-history-all" class="btn ghost tiny">全期間</button></div><div id="workout-history"></div></div>
+      <div class="section card"><div class="section-title"><h2>翌週の週3メニュー</h2><span class="eyebrow">提案</span></div><p class="subtext">この週のトレーニング部位と種目を優先して、翌週の月・水・金に提案。記録のない部位は基本メニューで補完します。</p>
+        <div class="week-switch"><button class="btn ghost tiny" id="training-week-prev" type="button">← 前週</button><div id="training-week-label" class="week-label">今週の実績</div><button class="btn ghost tiny" id="training-week-next" type="button">次週 →</button></div><div class="nudge" id="training-week-stats"></div>
+        <div class="button-row"><button type="button" id="training-generate" class="btn secondary">提案を再作成</button><button type="button" id="training-save-plan" class="btn">提案を保存</button></div><div id="training-plan" class="training-plan"></div>
+        <p class="subtle-note">重量は直近の記録があれば参考値として表示します（自動的に増量しません）。未記録の部位は0kg＝重量未設定。痛みがある動作は避け、体調に合わせて調整してください。</p>
+      </div>
     </section>
     <section class="tab" data-page="settings"><div class="tab-heading"><h1>設定とバックアップ</h1><p class="subtext">消費カロリーの初期値やデータの書き出し・復元を管理。</p></div>
       <div class="card"><h2>消費カロリーの初期値</h2><p class="subtext">推定に必要な記録がそろうまでは、こちらの数値を表示します。</p>
@@ -117,14 +163,14 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
         <div class="alert hidden" id="persistence-warning">このブラウザでは記録を保存できていません。ファイルへ書き出して保管してください。</div>
         <div class="button-row"><button type="button" class="btn secondary" id="export-json">JSONバックアップ</button><button type="button" class="btn ghost" id="export-csv">CSV出力</button></div>
         <button type="button" class="btn ghost full" id="restore-trigger">JSONから記録を読み込む</button><input type="file" class="hidden" id="import-file" accept=".json,application/json" />
-        <p class="subtle-note">v1/v2/v3のJSONも取り込めます。同じ日付は新しい読み込みデータが優先されます。</p>
+        <p class="subtle-note">v1/v2/v3/v4のJSONも取り込めます。筋トレも含みます。同じ日付は新しい読み込みデータが優先されます。</p>
       </div>
       <div class="section card"><h2>パスコード・プライバシー</h2><p class="subtext">起動時にPINを要求し、10分の無操作、または他の画面に1分以上移動して戻ったときもロックします。変更機能は後日追加予定です。</p><p class="subtle-note">GitHub Pagesのページとコード自体は誰でも開けます。6桁PINによる端末内の保護であり、強固な認証やクラウド保存ではありません。</p></div>
-      <p class="footer">代謝ログ v3.1 • 無料・広告なし・端末内保存</p>
+      <p class="footer">代謝ログ v4.0.0 • 無料・広告なし・端末内保存</p>
     </section>
   </main>
 </div>
-<nav class="menu" id="bottom-nav" aria-label="画面を切り替える"><button type="button" class="nav-item active" data-tab="dashboard"><span class="nav-emoji">⌂</span>ホーム</button><button type="button" class="nav-item" data-tab="log"><span class="nav-emoji">＋</span>記録</button><button type="button" class="nav-item" data-tab="targets"><span class="nav-emoji">▦</span>週目標</button><button type="button" class="nav-item" data-tab="foods"><span class="nav-emoji">▤</span>食品メモ</button><button type="button" class="nav-item" data-tab="settings"><span class="nav-emoji">⚙</span>設定</button></nav>
+<nav class="menu" id="bottom-nav" aria-label="画面を切り替える"><button type="button" class="nav-item active" data-tab="dashboard"><span class="nav-emoji">⌂</span>ホーム</button><button type="button" class="nav-item" data-tab="log"><span class="nav-emoji">＋</span>記録</button><button type="button" class="nav-item" data-tab="targets"><span class="nav-emoji">▦</span>週目標</button><button type="button" class="nav-item" data-tab="foods"><span class="nav-emoji">▤</span>食品メモ</button><button type="button" class="nav-item" data-tab="training"><span class="nav-emoji">◉</span>筋トレ</button><button type="button" class="nav-item" data-tab="settings"><span class="nav-emoji">⚙</span>設定</button></nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>(function (root, factory) {
   const api = factory();
@@ -209,9 +255,41 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
   }
   return {iso,shift,diff,calculate,weightTrend,robustWeightSlope};
 });
+</script><script>(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.TrainingCore=api;})(typeof window!=='undefined'?window:globalThis,function(){
+'use strict';
+const MUSCLES=['胸','背中','肩','脚（前）','脚（後）・臀部','腕（二頭）','腕（三頭）','腹筋・体幹','ふくらはぎ','その他'];
+const DEFAULTS={'胸':'チェストプレス','背中':'ラットプルダウン','肩':'ショルダープレス','脚（前）':'レッグプレス','脚（後）・臀部':'レッグカール','腕（二頭）':'アームカール','腕（三頭）':'ケーブルプレスダウン','腹筋・体幹':'クランチ','ふくらはぎ':'カーフレイズ','その他':'好きな種目'};
+const TEMPLATES=[
+ {day:0,label:'A・全身 / 胸・背中・脚',muscles:['胸','背中','脚（前）','腹筋・体幹']},
+ {day:2,label:'B・全身 / 肩・脚・背中',muscles:['肩','脚（後）・臀部','背中','腕（三頭）']},
+ {day:4,label:'C・全身 / 胸・背中・脚',muscles:['胸','背中','脚（前）','腕（二頭）']},
+];
+const validDate=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&!isNaN(Date.parse(s+'T12:00:00'))&&new Date(s+'T12:00:00').getFullYear()===+s.slice(0,4);
+const monday=date=>{const d=new Date(date+'T12:00:00');d.setDate(d.getDate()-(d.getDay()+6)%7);return localISO(d);};
+const localISO=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const shift=(date,n)=>{const d=new Date(date+'T12:00:00');d.setDate(d.getDate()+n);return localISO(d);};
+const bounded=(v,a,b)=>Number.isFinite(Number(v))&&v!==''&&v!==null&&v!==undefined&&Number(v)>=a&&Number(v)<=b?Number(v):null;
+const text=(v,max)=>String(v??'').trim().slice(0,max);
+function cleanExercise(e){if(!e||!MUSCLES.includes(e.muscle))return null;const reps=bounded(e.reps,1,100),sets=bounded(e.sets,1,15),weight=bounded(e.weight,0,1000);if([reps,sets,weight].some(v=>v===null))return null;return {id:text(e.id,90)||'ex-'+Math.random().toString(36).slice(2),muscle:e.muscle,name:text(e.name,60),weight,reps,sets};}
+function cleanWorkout(w,today){if(!w||!validDate(w.date)||w.date>today)return null;const ex=Array.isArray(w.exercises)?w.exercises.slice(0,30).map(cleanExercise).filter(Boolean):[];if(!ex.length)return null;const t=/^([01]\d|2[0-3]):[0-5]\d$/.test(w.time||'')?w.time:'12:00';return {id:text(w.id,90)||'wo-'+Math.random().toString(36).slice(2),date:w.date,time:t,gym:text(w.gym,90),note:text(w.note,200),exercises:ex};}
+function cleanWorkouts(a,today){return Array.isArray(a)?a.slice(0,2000).map(x=>cleanWorkout(x,today)).filter(Boolean):[];}
+function getWeekStats(workouts,from){const to=shift(from,7);const list=workouts.filter(w=>w.date>=from&&w.date<to);const tally={};for(const w of list)for(const ex of w.exercises)tally[ex.muscle]=(tally[ex.muscle]||0)+ex.sets;return {sessions:list.length,sets:Object.values(tally).reduce((a,b)=>a+b,0),tally,workouts:list};}
+function cleanPlan(p){if(!p||!validDate(p.sourceWeek)||monday(p.sourceWeek)!==p.sourceWeek||!validDate(p.nextWeek)||p.nextWeek!==shift(p.sourceWeek,7)||!Array.isArray(p.days)||p.days.length!==3)return null;
+ const days=p.days.map((d,i)=>{const tmpl=TEMPLATES[i],ex=Array.isArray(d.exercises)?d.exercises.slice(0,8).map(cleanExercise).filter(Boolean):[];if(!ex.length)return null;return {date:shift(p.nextWeek,tmpl.day),label:tmpl.label,exercises:ex};});return days.some(x=>!x)?null:{sourceWeek:p.sourceWeek,nextWeek:p.nextWeek,days,saved:true};}
+function makePlan(workouts,sourceWeek){const from=monday(sourceWeek),week=getWeekStats(workouts,from),next=shift(from,7);
+ const eligible=workouts.filter(w=>w.date<next).sort((a,b)=>(b.date+' '+b.time).localeCompare(a.date+' '+a.time));
+ const all=[];for(const w of eligible){const prioritized=w.date>=from&&w.date<next;for(const ex of w.exercises)all.push({...ex,date:w.date,prioritized});}
+ const days=TEMPLATES.map(t=>({date:shift(next,t.day),label:t.label,exercises:t.muscles.map(muscle=>{
+ const matches=all.filter(x=>x.muscle===muscle),recent=matches.find(x=>x.prioritized)||matches[0];
+ const setCount=week.tally[muscle]>=8?2:3;
+ return {id:'plan-'+muscle+'-'+t.day,muscle,name:recent?.name||DEFAULTS[muscle],weight:recent?.weight??0,reps:recent?.reps??(muscle==='脚（前）'||muscle==='脚（後）・臀部'?12:10),sets:setCount,source:recent?'logged':'sample'};
+ })}));
+ return {sourceWeek:from,nextWeek:next,days,saved:false,sourceSessions:week.sessions};}
+return {MUSCLES,DEFAULTS,TEMPLATES,cleanExercise,cleanWorkout,cleanWorkouts,cleanPlan,makePlan,getWeekStats,monday,shift};
+});
 </script><script>(function () {
 'use strict';
-const Core=window.TDEECore, SECURE_KEY='metabolog.secure.v2', LEGACY_KEY='metabolog.v1';
+const Core=window.TDEECore, Training=window.TrainingCore, SECURE_KEY='metabolog.secure.v2', LEGACY_KEY='metabolog.v1';
 const $=id=>document.getElementById(id), iso=()=>Core.iso(new Date());
 const WEEKDAYS=['月','火','水','木','金','土','日'];
 const validDay=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&Core.iso(Core.parse?Core.parse(s):new Date(s+'T12:00:00'))===s;
@@ -222,7 +300,7 @@ const precise=n=>n===null?'—':Number(n.toFixed(1)).toLocaleString('ja-JP');
 const nice=d=>{const p=d.split('-');return `${+p[1]}/${+p[2]}`;};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const id=()=>crypto.randomUUID?crypto.randomUUID():'id-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
-function blankState(){return {version:3,settings:{baseline:2050,dailyOffset:-150,weekPlans:{}},entries:{},foods:[]};}
+function blankState(){return {version:4,settings:{baseline:2050,dailyOffset:-150,weekPlans:{}},entries:{},foods:[],workouts:[],trainingPlans:{}};}
 function cleanMeal(m){
  if(!m||typeof m!=='object')return null;
  const calories=int(m.calories,0,10000);if(calories===null)return null;
@@ -249,7 +327,7 @@ function cleanFoods(raw){if(!Array.isArray(raw))return [];return raw.slice(0,500
 function sanitize(raw){
  const st=blankState();if(!raw||typeof raw!=='object')return st;
  st.settings.baseline=int(raw.settings?.baseline,900,5000)??2050;
- if(raw.version===3){
+ if(raw.version>=3){
   st.settings.dailyOffset=int(raw.settings?.dailyOffset,-4000,4000)??-150;
   if(raw.settings?.weekPlans&&typeof raw.settings.weekPlans==='object')for(const [monday,plan] of Object.entries(raw.settings.weekPlans)){
    if(!validDay(monday)||weekStart(monday)!==monday||!plan||!Array.isArray(plan.goals)||plan.goals.length!==7)continue;
@@ -274,9 +352,14 @@ function sanitize(raw){
    st.settings.weekPlans[monday]={goals,total:goals.reduce((a,b)=>a+b,0),autoIndex:6,basis:st.settings.baseline,offset:st.settings.dailyOffset};
   }
  }
- st.entries=cleanEntries(raw.entries);st.foods=cleanFoods(raw.foods);return st;
+ st.entries=cleanEntries(raw.entries);st.foods=cleanFoods(raw.foods);
+ st.workouts=Training.cleanWorkouts(raw.workouts,iso());
+ if(raw.trainingPlans&&typeof raw.trainingPlans==='object'&&!Array.isArray(raw.trainingPlans))for(const [week,plan] of Object.entries(raw.trainingPlans)){
+  const cleaned=Training.cleanPlan(plan);if(cleaned&&week===cleaned.sourceWeek)st.trainingPlans[week]=cleaned;
+ }
+ return st;
 }
-let state=blankState(), secretKey=null, saltBytes=null, setupMode=false, persistent=true, writeQueue=Promise.resolve(), editingMeal=null,editingFood=null,selectedWeek='',estimateCache=null,lastActivity=Date.now(),awayAt=0,noticeTimer;
+let state=blankState(), secretKey=null, saltBytes=null, setupMode=false, persistent=true, writeQueue=Promise.resolve(), editingMeal=null,editingFood=null,selectedWeek='',estimateCache=null,lastActivity=Date.now(),awayAt=0,noticeTimer,workoutDraft=[],editingWorkout=null,trainingWeek='',trainingDraftPlan=null;
 function getEntry(date){return state.entries[date]||{date,weight:null,meals:[],calories:null,complete:false};}
 function weekStart(date){const d=new Date(date+'T12:00:00');d.setDate(d.getDate()-(d.getDay()+6)%7);return Core.iso(d);}
 function currentEstimate(){if(estimateCache===null){const c=calc();estimateCache=c.ready?c.estimated:state.settings.baseline;}return estimateCache;}
@@ -323,9 +406,9 @@ async function unlock(pin,confirmPin){
   const loaded=JSON.parse(new TextDecoder().decode(bytes));state=sanitize(loaded);secretKey=k;saltBytes=salt;
  }
  estimateCache=null;setupMode=false;document.body.classList.remove('locked');$('app-root').removeAttribute('aria-hidden');lastActivity=Date.now();
- $('entry-date').max=iso();$('entry-date').value=iso();$('food-direct-date').max=iso();$('food-direct-date').value=iso();selectedWeek=weekStart(iso());updateAll();fillEntry();navigate('dashboard');
+ $('entry-date').max=iso();$('entry-date').value=iso();$('food-direct-date').max=iso();$('food-direct-date').value=iso();selectedWeek=weekStart(iso());trainingWeek=weekStart(iso());resetWorkoutEditor();updateAll();fillEntry();navigate('dashboard');
 }
-async function lock(){await writeQueue;secretKey=null;saltBytes=null;state=blankState();editingMeal=null;editingFood=null;showLock();}
+async function lock(){await writeQueue;secretKey=null;saltBytes=null;state=blankState();editingMeal=null;editingFood=null;workoutDraft=[];editingWorkout=null;trainingDraftPlan=null;showLock();}
 function calc(){const entries={};for(const [date,r] of Object.entries(state.entries)){entries[date]=r.complete?r:{...r,calories:null};}return Core.calculate(entries,iso());}
 function aggregate(meals,field){let value=0,missing=0;for(const m of meals){if(m[field]===null||m[field]===undefined)missing++;else value+=m[field];}return {value,missing};}
 function renderDashboard(){
@@ -352,8 +435,8 @@ function renderHistory(){const all=Object.values(state.entries).sort((a,b)=>b.da
  const root=$('history-list');root.innerHTML='';if(!arr.length){root.innerHTML='<p class="subtext">まだ記録はありません。</p>';return;}
  for(const r of arr.slice(0,60)){const row=document.createElement('div');row.className='history-item';const left=document.createElement('div');const title=document.createElement('div');title.className='history-date';title.textContent=`${r.date}　${r.complete?'✓ 完了':'記録中'}`;const detail=document.createElement('div');detail.className='history-details';detail.textContent=`${r.weight===null?'体重 —':`体重 ${precise(r.weight)} kg`}　/　${r.calories===null?'食事 —':`${fmt(r.calories)} kcal`}　/　目標 ${fmt(getDayGoal(r.date).value)} kcal　/　${difference(r.calories,getDayGoal(r.date).value)}`;const edit=document.createElement('button');edit.className='history-edit';edit.type='button';edit.textContent='編集';edit.addEventListener('click',()=>{$('entry-date').value=r.date;fillEntry();navigate('log');});left.append(title,detail);row.append(left,edit);root.append(row);}
 }
-function updateAll(){estimateCache=null;renderDashboard();renderWeekly();renderFoods();renderFoodChoices();$('setting-baseline').value=state.settings.baseline;$('persistence-warning').classList.toggle('hidden',persistent);}
-function navigate(page){document.querySelectorAll('.tab').forEach(el=>el.classList.toggle('active',el.dataset.page===page));document.querySelectorAll('[data-tab]').forEach(el=>{const on=el.dataset.tab===page;el.classList.toggle('active',on);el.setAttribute('aria-current',on?'page':'false');});if(page==='log')fillEntry();window.scrollTo({top:0,behavior:'instant'});}
+function updateAll(){estimateCache=null;renderDashboard();renderWeekly();renderFoods();renderFoodChoices();renderRecent();renderTraining();$('setting-baseline').value=state.settings.baseline;$('persistence-warning').classList.toggle('hidden',persistent);}
+function navigate(page){document.querySelectorAll('.tab').forEach(el=>el.classList.toggle('active',el.dataset.page===page));document.querySelectorAll('[data-tab]').forEach(el=>{const on=el.dataset.tab===page;el.classList.toggle('active',on);el.setAttribute('aria-current',on?'page':'false');});if(page==='log')fillEntry();if(page==='training')renderTraining();window.scrollTo({top:0,behavior:'instant'});}
 function jumpDate(shift){const old=$('entry-date').value||iso(),next=Core.shift(old,shift);if(next>iso())return toast('未来の日付は記録できません');$('entry-date').value=next;fillEntry();}
 function fillEntry(){const r=getEntry($('entry-date').value);$('entry-weight').value=r.weight??'';$('day-complete').checked=!!r.complete;
  $('daily-summary').innerHTML=goalSummary(r.calories,getDayGoal(r.date).value)+`<div class="subtle-note">この日の食事：${r.meals.length}件</div>`;$('entry-date-caption').textContent=`${r.date}の記録を編集中`;$('entry-next').disabled=r.date>=iso();
@@ -463,8 +546,11 @@ function foodEstimatePreview(){
  const m=mealInputs('food');const cal=Math.round(4*(m.p??0)+9*(m.f??0)+4*(m.c??0)+7*(m.alcohol??0));
  el.textContent=`PFC等からの概算：${fmt(cal)} kcal（P×4 + F×9 + C×4 + アルコール×7）`;
 }
-function renderFoods(){const root=$('food-list');root.innerHTML='';$('food-count').textContent=`${state.foods.length}件`;if(!state.foods.length){root.innerHTML='<p class="subtext">よく食べる食品を登録してみよう。</p>';return;}
- for(const f of state.foods){const wrap=document.createElement('div');wrap.className='food-item';wrap.innerHTML=`<div class="item-head"><div class="item-name">${esc(f.name)}</div><div class="item-kcal">${fmt(f.calories)} kcal</div></div><div class="item-macros">P ${precise(f.p)}g　F ${precise(f.f)}g　C ${precise(f.c)}g　お酒 ${precise(f.alcohol)}g</div>`;
+function renderFoods(){const root=$('food-list');root.innerHTML='';const query=($('food-search').value||'').normalize('NFKC').toLocaleLowerCase('ja');
+ const filtered=state.foods.filter(f=>f.name.normalize('NFKC').toLocaleLowerCase('ja').includes(query));
+ $('food-count').textContent=`${filtered.length} / ${state.foods.length}件`;
+ if(!filtered.length){root.innerHTML=`<p class="subtext">${state.foods.length?'検索条件に一致する食品がありません。':'よく食べる食品を登録してみよう。'}</p>`;return;}
+ for(const f of filtered){const wrap=document.createElement('div');wrap.className='food-item';wrap.innerHTML=`<div class="item-head"><div class="item-name">${esc(f.name)}</div><div class="item-kcal">${fmt(f.calories)} kcal</div></div><div class="item-macros">P ${precise(f.p)}g　F ${precise(f.f)}g　C ${precise(f.c)}g　お酒 ${precise(f.alcohol)}g</div>`;
  const actions=document.createElement('div');actions.className='item-actions';const use=document.createElement('button');use.type='button';use.textContent='この食品を食事に追加';use.onclick=async()=>{const date=$('food-direct-date').value,category=$('food-direct-category').value;if(await addPresetFood(f,date,category)){navigate('log');toast(`${f.name}を${nice(date)}の${category}に追加しました`);}};
  const edit=document.createElement('button');edit.type='button';edit.textContent='編集';edit.onclick=()=>{editingFood=f.id;$('food-heading').textContent='食品メモを編集';$('food-save').textContent='食品メモを更新';$('food-cancel').classList.remove('hidden');fillMacro('food',f);foodEstimatePreview();$('food-form').scrollIntoView({behavior:'smooth',block:'start'});};
  const del=document.createElement('button');del.type='button';del.textContent='削除';del.className='delete';del.onclick=async()=>{if(!confirm(`「${f.name}」を削除しますか？`))return;state.foods=state.foods.filter(x=>x.id!==f.id);await save();renderFoods();renderFoodChoices();toast('食品メモを削除しました');};
@@ -474,14 +560,71 @@ function resetFoodForm(){editingFood=null;$('food-form').reset();foodEstimatePre
 async function saveFood(){const input=mealInputs('food');if(!input.name||input.calories===null||!checkOptional('food'))return toast('名前と数値を確認してください');const data={id:editingFood||id(),...input};if(editingFood){const i=state.foods.findIndex(x=>x.id===editingFood);if(i<0)return toast('編集対象がありません');state.foods[i]=data;}else state.foods.push(data);await save();renderFoods();renderFoodChoices();resetFoodForm();toast('食品メモを保存しました。記録画面からすぐ使えます');}
 async function saveBaseline(){const n=int($('setting-baseline').value,900,5000);if(n===null)return toast('900〜5,000 kcalで入力してください');state.settings.baseline=n;await save();updateAll();toast('初期値を更新しました');}
 function dl(content,type,name){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);}
-function exportJSON(){dl(JSON.stringify(state,null,2),'application/json',`metabolog-v3-backup-${iso()}.json`);toast('JSONバックアップを保存しました');}
+function exportJSON(){dl(JSON.stringify(state,null,2),'application/json',`metabolog-v4-backup-${iso()}.json`);toast('JSONバックアップを保存しました（筋トレ含む）');}
 const csv=s=>'"'+String(s??'').replace(/"/g,'""')+'"';
 function exportCSV(){const lines=['date,weight_kg,complete,category,name,calories,p_g,f_g,c_g,alcohol_g,daily_target_kcal'];for(const r of Object.values(state.entries).sort((a,b)=>a.date.localeCompare(b.date))){const meals=r.meals.length?r.meals:[{category:'',name:'',calories:'',p:'',f:'',c:'',alcohol:''}];for(const m of meals)lines.push([r.date,r.weight??'',r.complete,m.category,m.name,m.calories,m.p??'',m.f??'',m.c??'',m.alcohol??'',getDayGoal(r.date).value].map(csv).join(','));}dl('\ufeff'+lines.join('\r\n'),'text/csv;charset=utf-8',`metabolog-v3-${iso()}.csv`);}
-async function importJSON(file){if(!file)return;try{const raw=JSON.parse(await file.text());if(![1,2,3].includes(raw?.version)||!raw.entries||typeof raw.entries!=='object')throw Error('invalid');const incoming=sanitize(raw),count=Object.keys(incoming.entries).length;
+async function importJSON(file){if(!file)return;try{const raw=JSON.parse(await file.text());if(![1,2,3,4].includes(raw?.version)||!raw.entries||typeof raw.entries!=='object')throw Error('invalid');const incoming=sanitize(raw),count=Object.keys(incoming.entries).length;
  if(!confirm(`${count}日分のデータを読み込みます。同じ日付はバックアップのデータで上書きします。続けますか？`))return;
  state.entries={...state.entries,...incoming.entries};if(raw.version>=2){state.foods=[...state.foods,...incoming.foods.filter(f=>!state.foods.some(e=>e.id===f.id))];state.settings.weekPlans={...state.settings.weekPlans,...incoming.settings.weekPlans};}
+ if(raw.version>=4){state.workouts=[...state.workouts.filter(x=>!incoming.workouts.some(y=>y.id===x.id)),...incoming.workouts];state.trainingPlans={...state.trainingPlans,...incoming.trainingPlans};}
  await save();updateAll();fillEntry();toast(`${count}日分の記録を読み込みました`);
  }catch(e){toast('読み込めません。代謝ログのJSONか確認してください');}finally{$('import-file').value='';}}
+
+const RICE={calories:156,p:2.5,f:0.3,c:37.1};
+function riceValues(grams){const round1=x=>Math.round(x*10)/10;return {name:`白ごはん ${grams}g`,calories:Math.round(RICE.calories*grams/100),p:round1(RICE.p*grams/100),f:round1(RICE.f*grams/100),c:round1(RICE.c*grams/100),alcohol:0};}
+function renderRice(){const grams=int($('rice-grams').value,1,1000);$('rice-preview').textContent=grams===null?'重さを1〜1,000gで入力してください':`${fmt(grams*RICE.calories/100)} kcal（P ${precise(riceValues(grams).p)}g / F ${precise(riceValues(grams).f)}g / C ${precise(riceValues(grams).c)}g）`;
+ $('rice-add').disabled=grams===null;document.querySelectorAll('[data-rice]').forEach(b=>b.classList.toggle('selected',String(grams)===b.dataset.rice));}
+async function addRice(){const grams=int($('rice-grams').value,1,1000);if(grams===null)return toast('炊飯後のお米の重さを確認してください');const food=riceValues(grams),date=$('entry-date').value;
+ if(await addPresetFood(food,date,$('rice-category').value))toast(`${food.name} を追加しました`);}
+function recentFoods(){const recent=[],seen=new Set();for(const r of Object.values(state.entries).sort((a,b)=>b.date.localeCompare(a.date))){for(const meal of [...r.meals].reverse()){
+ const key=[meal.name,meal.calories,meal.p,meal.f,meal.c,meal.alcohol].join('|');if(seen.has(key))continue;seen.add(key);recent.push(meal);if(recent.length>=10)return recent;
+ }}return recent;}
+function renderRecent(){const root=$('recent-list');root.innerHTML='';const recent=recentFoods();if(!recent.length){root.innerHTML='<p class="blank-note">まだ食事履歴がありません。</p>';return;}
+ for(const meal of recent){const wrap=document.createElement('div');wrap.className='compact-food';
+ const info=document.createElement('div');info.innerHTML=`<div class="food-name">${esc(meal.name||meal.category)}</div><div class="food-detail">${fmt(meal.calories)} kcal ・ P ${precise(meal.p)}g / F ${precise(meal.f)}g / C ${precise(meal.c)}g</div>`;
+ const button=document.createElement('button');button.type='button';button.textContent='＋ 再入力';button.onclick=async()=>{
+ const date=$('entry-date').value,food={name:meal.name||meal.category,calories:meal.calories,p:meal.p,f:meal.f,c:meal.c,alcohol:meal.alcohol};
+ if(await addPresetFood(food,date,$('recent-category').value))toast('最近の食事をコピーしました');
+ };wrap.append(info,button);root.append(wrap);}
+}
+function resetWorkoutEditor(){editingWorkout=null;workoutDraft=[];$('workout-heading').textContent='トレーニングを記録';$('workout-save').textContent='この日の筋トレを保存';$('workout-cancel').classList.add('hidden');$('workout-date').max=iso();$('workout-date').value=iso();
+ $('workout-time').value='18:00';$('workout-gym').value='';$('workout-note').value='';$('exercise-weight').value='';$('exercise-reps').value='';$('exercise-sets').value='3';$('exercise-name').value='';$('exercise-muscle').value='胸';renderWorkoutDraft();}
+function readExercise(){const muscle=$('exercise-muscle').value,weight=int($('exercise-weight').value,0,1000),reps=int($('exercise-reps').value,1,100),sets=int($('exercise-sets').value,1,15);
+ if(weight===null||reps===null||sets===null||!Training.MUSCLES.includes(muscle))return null;
+ return {id:id(),muscle,name:cleanText($('exercise-name').value,60),weight,reps,sets};}
+function renderWorkoutDraft(){const root=$('workout-draft');root.innerHTML='';$('draft-exercise-count').textContent=`${workoutDraft.length}種目`;
+ if(!workoutDraft.length){root.innerHTML='<p class="blank-note" style="padding:12px">種目を追加すると、ここに並びます。</p>';return;}
+ workoutDraft.forEach((ex,i)=>{const row=document.createElement('div');row.className='draft-exercise';const label=document.createElement('div');label.innerHTML=`<strong>${esc(ex.muscle)} ${ex.name?'／'+esc(ex.name):''}</strong><p>${ex.weight}kg × ${ex.reps}回 × ${ex.sets}セット</p>`;const del=document.createElement('button');del.textContent='削除';del.type='button';del.onclick=()=>{workoutDraft.splice(i,1);renderWorkoutDraft();};row.append(label,del);root.append(row);});}
+function addWorkoutExercise(){const ex=readExercise();if(!ex)return toast('部位・重さ・回数・セットを確認してください。自重なら0kgでOK');if(workoutDraft.length>=30)return toast('1回につき30種目まで');workoutDraft.push(ex);renderWorkoutDraft();
+ $('exercise-name').value='';$('exercise-weight').value='';$('exercise-reps').value='';$('exercise-name').focus();}
+async function saveWorkout(){const date=$('workout-date').value;if(!validDay(date)||date>iso())return toast('過去または今日の日付を選んでください');if(!/^([01]\d|2[0-3]):[0-5]\d$/.test($('workout-time').value))return toast('時間を選択してください');if(!workoutDraft.length)return toast('まず種目を1つ以上追加してください');
+ const data=Training.cleanWorkout({id:editingWorkout||id(),date,time:$('workout-time').value,gym:$('workout-gym').value,note:$('workout-note').value,exercises:workoutDraft},iso());if(!data)return toast('種目の内容を確認してください');
+ if(editingWorkout){const idx=state.workouts.findIndex(w=>w.id===editingWorkout);if(idx<0)return toast('編集する記録が見つかりません');state.workouts[idx]=data;}else state.workouts.push(data);
+ state.workouts.sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));trainingDraftPlan=null;await save();resetWorkoutEditor();renderTraining();toast('筋トレを保存しました');}
+function editWorkout(w){editingWorkout=w.id;workoutDraft=w.exercises.map(x=>({...x}));$('workout-heading').textContent='トレーニングを編集';$('workout-save').textContent='編集した筋トレを保存';$('workout-cancel').classList.remove('hidden');
+ $('workout-date').value=w.date;$('workout-time').value=w.time;$('workout-gym').value=w.gym;$('workout-note').value=w.note;renderWorkoutDraft();$('workout-heading').scrollIntoView({behavior:'smooth',block:'start'});}
+async function deleteWorkout(w){if(!confirm(`${w.date} の筋トレ記録を削除しますか？`))return;state.workouts=state.workouts.filter(x=>x.id!==w.id);if(editingWorkout===w.id)resetWorkoutEditor();trainingDraftPlan=null;await save();renderTraining();toast('筋トレ記録を削除しました');}
+function renderWorkoutHistory(){const month=$('workout-history-month').value,workouts=state.workouts.filter(w=>!month||w.date.startsWith(month)).sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));$('workout-count').textContent=`${workouts.length}/${state.workouts.length}回`;
+ const root=$('workout-history');root.innerHTML='';if(!workouts.length){root.innerHTML='<p class="blank-note">まだ該当する筋トレ記録はありません。</p>';return;}
+ for(const w of workouts.slice(0,60)){const item=document.createElement('div');item.className='session-card';const title=document.createElement('div');title.className='session-title';title.textContent=`${w.date} ${w.time}　${w.gym||'店舗未入力'}`;
+ const sub=document.createElement('div');sub.className='session-meta';sub.textContent=`${w.exercises.length}種目 / ${w.exercises.reduce((a,x)=>a+x.sets,0)}セット${w.note?' ・ '+w.note:''}`;
+ item.append(title,sub);for(const ex of w.exercises){const row=document.createElement('div');row.className='session-meta';row.textContent=`${ex.muscle}｜${ex.name||'種目名なし'}：${ex.weight}kg × ${ex.reps}回 × ${ex.sets}セット`;item.append(row);}
+ const actions=document.createElement('div');actions.className='item-actions margin-top';const edit=document.createElement('button');edit.type='button';edit.textContent='編集';edit.onclick=()=>editWorkout(w);const del=document.createElement('button');del.type='button';del.className='delete';del.textContent='削除';del.onclick=()=>deleteWorkout(w);actions.append(edit,del);item.append(actions);root.append(item);}
+}
+function activeTrainingPlan(){return trainingDraftPlan||state.trainingPlans[trainingWeek]||Training.makePlan(state.workouts,trainingWeek);}
+function renderTrainingPlan(){const p=activeTrainingPlan(),root=$('training-plan');root.innerHTML='';const hint=document.createElement('p');hint.className='subtext';hint.textContent=`対象：${p.nextWeek} からの週（${p.saved?'保存済み':'自動提案・未保存'}）。同じ筋群には休息を確保。`;
+ root.append(hint);for(const day of p.days){const card=document.createElement('div');card.className='plan-day';const heading=document.createElement('h3');heading.textContent=`${day.date}｜${day.label}`;card.append(heading);
+ for(const ex of day.exercises){const line=document.createElement('div');line.className='plan-exercise';line.innerHTML=`<strong>${esc(ex.muscle)}</strong>　${esc(ex.name||'種目名未設定')}<div class="plan-note">${ex.weight>0?ex.weight+'kg（前回目安）':'重量は自分で設定'} ・ ${ex.reps}回 × ${ex.sets}セット${ex.source==='sample'?' ・ 初期例':''}</div>`;card.append(line);}root.append(card);}
+}
+function renderTraining(){if(!trainingWeek)trainingWeek=weekStart(iso());renderWorkoutHistory();const stat=Training.getWeekStats(state.workouts,trainingWeek);const end=Training.shift(trainingWeek,6);
+ $('training-week-label').textContent=`${nice(trainingWeek)}〜${nice(end)} の実績`;
+ const summary=Object.entries(stat.tally).sort((a,b)=>b[1]-a[1]).map(([m,n])=>`${m}${n}セット`).join('、');
+ $('training-week-stats').textContent=`筋トレ ${stat.sessions}回 / ${stat.sets}セット${summary?' ｜ 部位：'+summary:' ｜ この週の記録なし（過去の履歴か初期例から提案）'}`;
+ renderTrainingPlan();}
+function moveTrainingWeek(n){trainingWeek=Training.shift(trainingWeek,n*7);trainingDraftPlan=null;renderTraining();}
+function generateTrainingPlan(){trainingDraftPlan=Training.makePlan(state.workouts,trainingWeek);renderTrainingPlan();toast('今の記録を元に次週プランを再作成しました');}
+async function saveTrainingPlan(){const p=activeTrainingPlan();state.trainingPlans[trainingWeek]={sourceWeek:p.sourceWeek,nextWeek:p.nextWeek,days:p.days,saved:true};trainingDraftPlan=null;await save();renderTrainingPlan();toast('翌週の3回分のプランを保存しました');}
+
 function wire(){
  $('lock-form').addEventListener('submit',async e=>{e.preventDefault();$('lock-error').textContent='';$('lock-submit').disabled=true;$('lock-submit').textContent='確認中…';try{await unlock($('pin-field').value,$('pin-confirm').value);}catch(error){$('lock-error').textContent=error.message;console.warn('ロック解除できませんでした');}finally{$('lock-submit').disabled=false;$('lock-submit').textContent=setupMode?'設定して始める':'ロック解除';}});
  $('lock-now').onclick=lock;
@@ -489,13 +632,18 @@ function wire(){
  $('weight-form').onsubmit=e=>{e.preventDefault();saveWeight();};$('meal-form').onsubmit=e=>{e.preventDefault();saveMeal();};$('day-complete').onchange=setComplete;$('cancel-edit').onclick=resetMealForm;$('calc-meal-cal').onclick=()=>macroCalories('meal');
  $('week-prev').onclick=()=>{selectedWeek=Core.shift(selectedWeek,-7);renderWeekly();};$('week-next').onclick=()=>{selectedWeek=Core.shift(selectedWeek,7);renderWeekly();};$('week-today').onclick=()=>{selectedWeek=weekStart(iso());renderWeekly();};$('auto-weekday').onchange=changeAutoDay;$('goal-offset').oninput=renderOffsetPreview; 
  $('week-plan-form').onsubmit=e=>{e.preventDefault();saveWeekPlan();};$('week-reset').onclick=resetWeekPlan;$('offset-form').onsubmit=e=>{e.preventDefault();saveOffset();};
- $('food-choice').onchange=syncQuickFoodButton;$('quick-add-food').onclick=quickAddFood;$('food-form').onsubmit=e=>{e.preventDefault();saveFood();};$('calc-food-cal').onclick=()=>{macroCalories('food');foodEstimatePreview();};$('food-form').addEventListener('input',foodEstimatePreview);$('food-cancel').onclick=resetFoodForm;$('settings-form').onsubmit=e=>{e.preventDefault();saveBaseline();};
+ $('food-choice').onchange=syncQuickFoodButton;$('quick-add-food').onclick=quickAddFood;$('food-form').onsubmit=e=>{e.preventDefault();saveFood();};$('calc-food-cal').onclick=()=>{macroCalories('food');foodEstimatePreview();};$('food-form').addEventListener('input',foodEstimatePreview);$('food-cancel').onclick=resetFoodForm;$('food-search').oninput=renderFoods;
+ $('rice-grams').oninput=renderRice;document.querySelectorAll('[data-rice]').forEach(b=>b.onclick=()=>{$('rice-grams').value=b.dataset.rice;renderRice();});$('rice-add').onclick=addRice;
+ $('exercise-muscle').innerHTML=Training.MUSCLES.map(m=>`<option value="${esc(m)}">${esc(m)}</option>`).join('');$('exercise-add').onclick=addWorkoutExercise;$('workout-save').onclick=saveWorkout;$('workout-cancel').onclick=resetWorkoutEditor;
+ $('workout-history-month').onchange=renderWorkoutHistory;$('workout-history-all').onclick=()=>{$('workout-history-month').value='';renderWorkoutHistory();};
+ $('training-week-prev').onclick=()=>moveTrainingWeek(-1);$('training-week-next').onclick=()=>moveTrainingWeek(1);$('training-generate').onclick=generateTrainingPlan;$('training-save-plan').onclick=saveTrainingPlan;
+ $('settings-form').onsubmit=e=>{e.preventDefault();saveBaseline();};
  $('export-json').onclick=exportJSON;$('export-csv').onclick=exportCSV;$('restore-trigger').onclick=()=>$('import-file').click();$('import-file').onchange=e=>importJSON(e.target.files[0]);
  for(const ev of ['pointerdown','keydown','touchstart'])document.addEventListener(ev,()=>{lastActivity=Date.now();},{passive:true});
  setInterval(()=>{if(secretKey&&Date.now()-lastActivity>10*60*1000)lock();},30000);
  document.addEventListener('visibilitychange',()=>{if(document.hidden){awayAt=Date.now();}else if(secretKey&&awayAt&&Date.now()-awayAt>60000)lock();});
 }
-function init(){wire();selectedWeek=weekStart(iso());$('now-date').textContent=new Intl.DateTimeFormat('ja-JP',{month:'long',day:'numeric',weekday:'short'}).format(new Date());showLock();if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});}
+function init(){wire();selectedWeek=weekStart(iso());$('now-date').textContent=new Intl.DateTimeFormat('ja-JP',{month:'long',day:'numeric',weekday:'short'}).format(new Date());renderRice();showLock();if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
