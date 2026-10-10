@@ -1,4 +1,4 @@
-const VERSION='metabolog-cache-v4.2.0';
+const VERSION='metabolog-cache-v4.3.0';
 const ASSETS=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(VERSION).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(names=>Promise.all(names.filter(n=>n.startsWith('metabolog-cache-')&&n!==VERSION).map(n=>caches.delete(n)))).then(()=>self.clients.claim())));
