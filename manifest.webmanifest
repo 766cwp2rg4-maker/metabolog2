@@ -2,7 +2,7 @@
   "id": "./",
   "name": "代謝ログ - 食事・体重・筋トレの管理",
   "short_name": "代謝ログ",
-  "description": "体重・食事・筋トレの記録、14日平均体重グラフ、Appleヘルスケアの体重データ取り込み",
+  "description": "体重・食事・筋トレ・MacroFactor履歴の統合記録。14日平均・Appleヘルスケアの体重取り込みにも対応",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
