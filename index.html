@@ -74,14 +74,14 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
   <p class="subtle-note">このPINは端末内のデータ保護用です。GitHub Pages自体へのアクセス制限ではありません。パスコードを忘れると暗号化したデータは復元できません。</p>
 </div></div>
 <div class="app" id="app-root" aria-hidden="true">
-  <header class="topbar"><div class="brand"><div class="brand-symbol" aria-hidden="true">↗</div><div><div class="brand-title">代謝ログ <span class="version">v4.2</span></div><div class="brand-sub">MY ENERGY TRACKER</div></div></div><button type="button" class="top-lock" id="lock-now" aria-label="アプリをロック">🔒 ロック</button></header>
+  <header class="topbar"><div class="brand"><div class="brand-symbol" aria-hidden="true">↗</div><div><div class="brand-title">代謝ログ <span class="version">v4.5</span></div><div class="brand-sub">MY ENERGY TRACKER</div></div></div><button type="button" class="top-lock" id="lock-now" aria-label="アプリをロック">🔒 ロック</button></header>
   <main>
     <section class="tab active" data-page="dashboard"><div class="tab-heading"><h1>今日のダッシュボード</h1><p class="subtext" id="now-date">今日</p></div>
       <div class="hero"><div class="hero-head"><strong>推定消費カロリー（1日）</strong><span class="state-pill" id="badge">初期設定値</span></div>
-        <div class="big-number"><span id="estimate">2,050</span><small>kcal</small></div><p class="hero-desc" id="estimate-desc">記録が増えると自動推定します。</p>
+        <div class="big-number"><span id="estimate">2,050</span><small>kcal</small></div><p class="hero-desc" id="estimate-desc">MacroFactorの直近推定値を起点に、新しい記録で更新します。</p>
         <div class="hero-footer"><div class="hero-metric"><small>今日の摂取目標</small><strong><span id="target">1,900</span> <small class="inline-unit">kcal</small></strong></div><div class="hero-metric"><small>目標の種類</small><strong id="target-context" class="context-small">週平均の設定</strong></div></div>
       </div>
-      <div id="calibration" class="section"><div class="card"><div class="progress-head"><strong class="small">推定のための記録</strong><span class="small muted" id="progress-days">0 / 14日</span></div><div class="progress-bar"><div class="progress-fill" id="calibration-progress" style="width:0%"></div></div><p class="subtle-note" id="progress-help">食事が完了した日を14日連続で記録しましょう。</p></div></div>
+      <div id="calibration" class="section"><div class="card"><div class="progress-head"><strong class="small">推定のための記録</strong><span class="small muted" id="progress-days">0 / 14日</span></div><div class="progress-bar"><div class="progress-fill" id="calibration-progress" style="width:0%"></div></div><p class="subtle-note" id="progress-help">最近42日のうち34日以上の完了した食事と体重の測定が必要です。</p></div></div>
       <div class="chip-row" id="estimate-facts"></div>
       <div class="section"><div class="section-title"><h2>今日の摂取</h2><button class="text-link" id="go-log" type="button">＋ 食事を記録 →</button></div>
         <div class="stat-grid"><div class="stat-item"><div class="stat-label">摂取カロリー</div><div class="stat-val" id="today-cal">—</div><p class="subtle-note" id="today-delta">目標との差 —</p></div><div class="stat-item"><div class="stat-label">朝の体重</div><div class="stat-val" id="today-weight">—</div><p class="subtle-note" id="today-complete">食事は未確定</p></div></div><div class="card goal-card" id="today-progress"></div>
@@ -94,7 +94,7 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
     <section class="tab" data-page="log"><div class="tab-heading"><h1>食事・体重を記録</h1><p class="subtext">朝・昼・夜・間食を別々に入力。合計は自動計算。</p></div>
       <div class="card"><div class="date-control"><h2>記録する日付</h2><p class="subtext">以前の日付も選べます。過去1年分でも1日ずつ入力・編集できます。</p><div class="date-switch"><button type="button" id="entry-prev" class="btn ghost tiny" aria-label="前日">← 前日</button><div class="input-shell"><input type="date" id="entry-date" class="date-input" aria-label="過去の日付を含む日付選択"></div><button type="button" id="entry-next" class="btn ghost tiny" aria-label="翌日">翌日 →</button></div><button class="text-link" type="button" id="entry-today">今日に戻る</button><p class="subtle-note" id="entry-date-caption"></p></div>
         <form id="weight-form"><div class="field"><label for="entry-weight">朝の体重（入力しない日もOK）</label><div class="input-shell"><input type="number" id="entry-weight" min="20" max="400" step="0.1" inputmode="decimal" placeholder="56.5"><span>kg</span></div></div><button type="submit" class="btn secondary full">体重を保存</button></form>
-        <div class="hdivider"></div><h2>この日の集計</h2><div class="record-summary" id="daily-summary">—</div><div id="mf-daily-details" class="nudge hidden margin-top"></div><label class="checkline"><input type="checkbox" id="day-complete">この日の食事記録はすべて完了した</label><p class="subtle-note">消費カロリーの推定には、「完了」にした過去の14日連続分を使います。途中まで記録した日は対象外です。</p>
+        <div class="hdivider"></div><h2>この日の集計</h2><div class="record-summary" id="daily-summary">—</div><div id="mf-daily-details" class="nudge hidden margin-top"></div><label class="checkline"><input type="checkbox" id="day-complete">この日の食事記録はすべて完了した</label><p class="subtle-note">消費カロリーの推定には「完了」の過去の食事記録を使います。直近84日・56日の体重傾向を参照し、途中まで記録した日や今日の食事は対象外です。</p>
       </div>
       <div class="section card"><h2>よく食べるものから直接入力</h2><p class="subtext">食品メモに登録したものを選び、選択中の日付へワンタップで追加できます。</p><div class="input-shell"><select id="food-choice" aria-label="食品メモを選択"><option value="">登録した食品を選ぶ</option></select></div><div class="field margin-top"><label for="quick-category">どの食事として記録する？</label><div class="input-shell"><select id="quick-category"><option>朝食</option><option>昼食</option><option>夕食</option><option>間食</option><option>飲み物</option><option>その他</option></select></div></div><button type="button" class="btn secondary full" id="quick-add-food" disabled>選んだ食品をこの日の食事に追加</button><p class="subtle-note" id="quick-food-hint">食品メモを登録するとここから追加できます。</p></div>
 
@@ -163,7 +163,7 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
     </section>
     <section class="tab" data-page="settings"><div class="tab-heading"><h1>設定とバックアップ</h1><p class="subtext">消費カロリーの初期値やデータの書き出し・復元を管理。</p></div>
       <div class="card"><h2>消費カロリーの初期値</h2><p class="subtext">推定に必要な記録がそろうまでは、こちらの数値を表示します。</p>
-        <form id="settings-form"><div class="field"><label for="setting-baseline">初期消費カロリー</label><div class="input-shell"><input type="number" id="setting-baseline" min="900" max="5000" step="10" inputmode="numeric"><span>kcal/日</span></div></div><button type="submit" class="btn full">初期値を保存</button></form>
+        <div class="nudge"><strong>推定消費カロリー v4.5 の計算</strong><p class="subtext">完了した食事記録の平均摂取量と、直近84日・56日の体重の前後14日平均の変化からエネルギー収支を推定します（体重1kgあたり7,700kcalの概算）。MacroFactorのデータがあれば最後の推定値を基準にし、以後の新しい記録が10日分以上揃うと徐々に更新。体重・食事が不足する場合は推定を保留します。独自方式でありMacroFactorの計算式を再現したものではありません。</p></div><form id="settings-form"><div class="field"><label for="setting-baseline">初期消費カロリー（MacroFactor未取り込み時の仮値）</label><div class="input-shell"><input type="number" id="setting-baseline" min="900" max="5000" step="10" inputmode="numeric"><span>kcal/日</span></div></div><button type="submit" class="btn full">初期値を保存</button></form>
       </div>
 
       <div class="section card" id="mf-import-card">
@@ -212,84 +212,98 @@ body.locked .lock-screen{display:flex}.lock-card{width:100%;max-width:410px;back
   if (root) root.TDEECore = api;
 })(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : null), function () {
   'use strict';
-  const DAY = 86400000;
-  const iso = d => {
-    const year = d.getFullYear();
-    return `${year}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  };
+  const DAY = 86400000, ENERGY_DENSITY=7700;
+  const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   const parse = d => new Date(`${d}T12:00:00`);
   const shift = (d, n) => { const out = parse(d); out.setDate(out.getDate() + n); return iso(out); };
   const diff = (a,b) => Math.round((Date.UTC(+b.slice(0,4),+b.slice(5,7)-1,+b.slice(8,10)) - Date.UTC(+a.slice(0,4),+a.slice(5,7)-1,+a.slice(8,10)))/DAY);
-  const mean = nums => nums.reduce((a,b)=>a+b,0)/nums.length;
-  function median(values) {
-    const sorted = [...values].sort((a,b)=>a-b);
-    const mid = Math.floor(sorted.length/2);
-    return sorted.length%2 ? sorted[mid] : (sorted[mid-1]+sorted[mid])/2;
-  }
-  function weightedSlope(xs, ys, weights) {
-    const wsum = weights.reduce((a,b)=>a+b,0);
-    const mx = xs.reduce((a,x,i)=>a + x*weights[i],0)/wsum;
-    const my = ys.reduce((a,y,i)=>a + y*weights[i],0)/wsum;
-    const numerator = xs.reduce((a,x,i)=>a+weights[i]*(x-mx)*(ys[i]-my),0);
-    const denominator = xs.reduce((a,x,i)=>a+weights[i]*(x-mx)**2,0);
-    return denominator ? numerator/denominator : 0;
-  }
-  function robustWeightSlope(weights) {
-    const anchor=weights[0].date;
-    const xs=weights.map(r=>diff(anchor,r.date));
-    const ys=weights.map(r=>r.weight);
-    let slope = weightedSlope(xs,ys,ys.map(()=>1));
-    for(let iter=0;iter<5;iter++) {
-      const intercept=median(ys.map((y,i)=>y-slope*xs[i]));
-      const errors=ys.map((y,i)=>Math.abs(y-intercept-slope*xs[i]));
-      const scale=Math.max(.15, 1.4826*median(errors));
-      const w=errors.map(e=>Math.min(1, 1.345*scale/Math.max(e,0.000001)));
-      slope=weightedSlope(xs,ys,w);
+  const mean = values => values.reduce((a,b)=>a+b,0)/values.length;
+  const clamp = (x,lo,hi) => Math.max(lo,Math.min(hi,x));
+  const isDay = d=> typeof d==='string' && /^\d{4}-\d\d-\d\d$/.test(d) && iso(parse(d))===d;
+  const round5=n=>Math.round(n/5)*5;
+
+  // Estimates are derived ONLY from completed calorie days, and never include today.
+  function calculate(entries, today, options={}) {
+    const baseline=Number.isFinite(+options.baseline)&&+options.baseline>=900&&+options.baseline<=5000 ? +options.baseline:2050;
+    const calories=new Map(),weights=new Map();
+    for(const [key,r] of Object.entries(entries||{})){
+      if(!r||!isDay(key)||key>=today)continue;
+      if(Number.isFinite(+r.weight)&&r.weight!==null&&+r.weight>=20&&+r.weight<=400)weights.set(key,+r.weight);
+      if(r.complete===true&&r.calories!==null&&r.calories!==undefined && Number.isFinite(+r.calories)&&+r.calories>=500&&+r.calories<=10000)calories.set(key,+r.calories);
     }
-    return slope;
-  }
-  function calculate(entries, today) {
-    const records = Object.values(entries || {})
-      .filter(r => r && typeof r.date === 'string' && r.date < today && /^\d{4}-\d\d-\d\d$/.test(r.date));
-    const caloriesByDate = new Map(records.filter(r=>Number.isFinite(+r.calories) && +r.calories>=500 && +r.calories<=10000)
-      .map(r=>[r.date,+r.calories]));
-    const weightByDate = new Map(records.filter(r=>Number.isFinite(+r.weight) && +r.weight>=20 && +r.weight<=400)
-      .map(r=>[r.date,+r.weight]));
-    const calorieDates=[...caloriesByDate.keys()].sort();
-    if (!calorieDates.length) return {ready:false, days:0, weightDays:0, span:0, reason:'calories', required:14};
-    // Use the newest uninterrupted run of full-day calorie logs; never treat a missing log as zero intake.
-    let run=[calorieDates[calorieDates.length-1]];
-    for(let i=calorieDates.length-2;i>=0&&run.length<28;i--) {
-      if(diff(calorieDates[i],run[run.length-1])!==1) break;
-      run.push(calorieDates[i]);
+    const yesterday=shift(today,-1), lastComplete=[...calories.keys()].sort().at(-1)||null;
+    const source=options.macroMetrics&&typeof options.macroMetrics==='object'?options.macroMetrics:{};
+    let anchor=null;
+    for(const [date,record] of Object.entries(source)){
+      const e=record?.expenditure;
+      if(!isDay(date)||date>today||!Number.isFinite(+e)||+e<900||+e>5000)continue;
+      if(!anchor||date>anchor.date)anchor={date,estimate:+e};
     }
-    run.reverse();
-    const inRun=run.map(date=>({date,calories:caloriesByDate.get(date),weight:weightByDate.get(date)}));
-    const weights=inRun.filter(r=>typeof r.weight==='number');
-    const span=weights.length>=2?diff(weights[0].date,weights[weights.length-1].date):0;
-    const status={ready:false, days:run.length, weightDays:weights.length, span, required:14,
-      first:run[0], last:run[run.length-1]};
-    if(run.length<14) return {...status,reason:'calories'};
-    if(weights.length<8 || span<12) return {...status,reason:'weight'};
-    const start=weights[0].date, end=weights[weights.length-1].date;
-    const participating=inRun.filter(r=>r.date>=start&&r.date<=end);
-    const avgCalories=mean(participating.map(r=>r.calories));
-    const slope=robustWeightSlope(weights);
-    const rawTdee=avgCalories - slope*7700;
-    if(!Number.isFinite(rawTdee)||rawTdee<900||rawTdee>5000||Math.abs(slope)>.18){
-      return {...status, reason:'outlier', rawTdee, slope, avgCalories};
+    const weightList=[...weights].sort((a,b)=>a[0].localeCompare(b[0]));
+    const energyList=[...calories].sort((a,b)=>a[0].localeCompare(b[0]));
+    const recentDays=(end,span,map)=>[...map.keys()].filter(d=>d<=end&&d>=shift(end,-span+1)).length;
+    const recentCalories=recentDays(yesterday,14,calories),recentWeights=recentDays(yesterday,14,weights);
+    const calibration={days:recentDays(yesterday,42,calories),recentDays:recentCalories,weightDays:recentWeights,required:34};
+
+    function windowEvidence(end, length) {
+      const from=shift(end,-length+1),firstEnd=shift(from,13),lastStart=shift(end,-13);
+      const food=energyList.filter(([d])=>d>=from&&d<=end);
+      const measured=weightList.filter(([d])=>d>=from&&d<=end);
+      const early=measured.filter(([d])=>d<=firstEnd),late=measured.filter(([d])=>d>=lastStart);
+      // 80% of days need completed intake; require sufficient weigh-ins at both ends.
+      if(food.length<Math.ceil(length*.8)||early.length<2||late.length<2)return null;
+      const x0=mean(early.map(([d])=>diff(from,d)));
+      const x1=mean(late.map(([d])=>diff(from,d)));
+      if(x1-x0<length-24)return null;
+      const slope=(mean(late.map(([,w])=>w))-mean(early.map(([,w])=>w)))/(x1-x0);
+      const avgCalories=mean(food.map(([,kcal])=>kcal));
+      const rawTdee=avgCalories-ENERGY_DENSITY*slope;
+      if(!Number.isFinite(rawTdee)||rawTdee<900||rawTdee>5000||Math.abs(slope)>.18)return null;
+      return {rawTdee,avgCalories,slope,foodDays:food.length,weightDays:measured.length,period:length};
     }
-    return {...status, ready:true, estimated:Math.round(rawTdee/10)*10, rawTdee,
-      avgCalories:Math.round(avgCalories), slope, weeklyChange:slope*7,
-      period:diff(start,end)+1, quality:run.length>=21&&weights.length>=14&&span>=19?'high':'developing'};
+    // Prefer stable 84-day evidence, with a 56-day component for greater responsiveness.
+    function observation(end){
+      const a=windowEvidence(end,84),b=windowEvidence(end,56),c=!a&&!b?windowEvidence(end,42):null;
+      if(a&&b)return {rawTdee:a.rawTdee*.75+b.rawTdee*.25,avgCalories:a.avgCalories*.75+b.avgCalories*.25,slope:a.slope*.75+b.slope*.25,period:84,foodDays:a.foodDays,weightDays:a.weightDays,quality:'high'};
+      if(a)return {...a,quality:'high'};
+      if(b)return {...b,quality:'developing'};
+      if(c)return {...c,quality:'developing'};
+      return null;
+    }
+    // Do not infer new expenditure from stale logs. Pause rather than treating missing intake as zero.
+    let evidence=null,referenceDate=null;
+    const candidates=Array.from({length:29},(_,i)=>shift(yesterday,-i));
+    if(lastComplete && !candidates.includes(lastComplete))candidates.push(lastComplete);
+    for(const day of candidates){
+      if(recentDays(day,14,calories)<10||recentDays(day,14,weights)<1)continue;
+      const candidate=observation(day);
+      if(candidate){evidence=candidate;referenceDate=day;break;}
+    }
+    const fact=evidence?{avgCalories:Math.round(evidence.avgCalories),weeklyChange:evidence.slope*7,period:evidence.period,rawTdee:Math.round(evidence.rawTdee),quality:evidence.quality}:{};
+    if(anchor){
+      const newDays=lastComplete?Math.max(0,diff(anchor.date,lastComplete)):0;
+      // A recent MacroFactor export is an initial estimate, not immutable ground truth.
+      // Only adjust after at least ten NEW completed days and adequate new measurements.
+      const usable=evidence && referenceDate>anchor.date && newDays>=10 &&
+        [...calories.keys()].filter(d=>d>anchor.date&&d<=referenceDate).length>=10 &&
+        [...weights.keys()].some(d=>d>anchor.date&&d<=referenceDate);
+      if(!usable)return {ready:true,estimated:anchor.estimate,source:'macrofactor',holding:true,anchorDate:anchor.date,anchorEstimate:anchor.estimate,reason:'anchored',...calibration};
+      const elapsed=Math.max(0,diff(anchor.date,referenceDate));
+      const factor=1-Math.exp(-elapsed/35);
+      const maxShift=Math.min(600,elapsed*15);
+      const delta=clamp((evidence.rawTdee-anchor.estimate)*factor,-maxShift,maxShift);
+      const estimated=round5(clamp(anchor.estimate+delta,900,5000));
+      return {ready:true,estimated,source:'updated',holding:referenceDate<yesterday,anchorDate:anchor.date,anchorEstimate:anchor.estimate,lastDate:referenceDate,...calibration,...fact};
+    }
+    if(evidence)return {ready:true,estimated:round5(evidence.rawTdee),source:'independent',holding:referenceDate<yesterday,lastDate:referenceDate,...calibration,...fact};
+    return {ready:false,estimated:baseline,source:'baseline',holding:true,reason:recentCalories<10?'calories':'weight',...calibration};
   }
   function weightTrend(entries,today,lookback=35) {
     return Object.values(entries||{}).filter(r=>r && r.date && r.date<=today && typeof r.weight==='number' && r.date>=shift(today,-lookback+1))
       .map(r=>({date:r.date,weight:r.weight})).sort((a,b)=>a.date.localeCompare(b.date));
   }
-  return {iso,shift,diff,calculate,weightTrend,robustWeightSlope};
-});
-</script><script>(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.TrainingCore=api;})(typeof window!=='undefined'?window:globalThis,function(){
+  return {iso,parse,shift,diff,calculate,weightTrend};
+});</script><script>(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.TrainingCore=api;})(typeof window!=='undefined'?window:globalThis,function(){
 'use strict';
 const MUSCLES=['胸','背中','肩','脚（前）','脚（後）・臀部','腕（二頭）','腕（三頭）','腹筋・体幹','ふくらはぎ','その他'];
 const TEMPLATES=[
@@ -531,7 +545,7 @@ function sanitize(raw){
 let state=blankState(), secretKey=null, saltBytes=null, setupMode=false, persistent=true, writeQueue=Promise.resolve(), editingMeal=null,editingFood=null,selectedWeek='',estimateCache=null,lastActivity=Date.now(),awayAt=0,noticeTimer,workoutDraft=[],editingWorkout=null,trainingWeek='',trainingDraftPlan=null;
 function getEntry(date){return state.entries[date]||{date,weight:null,meals:[],calories:null,complete:false};}
 function weekStart(date){const d=new Date(date+'T12:00:00');d.setDate(d.getDate()-(d.getDay()+6)%7);return Core.iso(d);}
-function currentEstimate(){if(estimateCache===null){const c=calc();estimateCache=c.ready?c.estimated:state.settings.baseline;}return estimateCache;}
+function currentEstimate(){if(estimateCache===null){const c=calc();estimateCache=c.estimated;}return estimateCache;}
 function defaultDailyGoal(){return Math.max(0,Math.round(currentEstimate()+state.settings.dailyOffset));}
 function getWeekBudget(monday){const plan=state.settings.weekPlans[monday];return plan?plan.total:defaultDailyGoal()*7;}
 function getDayGoal(date){const monday=weekStart(date),index=(new Date(date+'T12:00:00').getDay()+6)%7,plan=state.settings.weekPlans[monday];return {value:plan?plan.goals[index]:defaultDailyGoal(),custom:!!plan};}
@@ -578,15 +592,26 @@ async function unlock(pin,confirmPin){
  $('entry-date').max=iso();$('entry-date').value=iso();$('food-direct-date').max=iso();$('food-direct-date').value=iso();selectedWeek=weekStart(iso());trainingWeek=weekStart(iso());resetWorkoutEditor();updateAll();fillEntry();navigate('dashboard');
 }
 async function lock(){pendingMF=null;mfPreview();pendingHealth=null;healthPreview();$('health-file').value='';await writeQueue;secretKey=null;saltBytes=null;state=blankState();editingMeal=null;editingFood=null;workoutDraft=[];editingWorkout=null;trainingDraftPlan=null;showLock();}
-function calc(){const entries={};for(const [date,r] of Object.entries(state.entries)){entries[date]=r.complete?r:{...r,calories:null};}return Core.calculate(entries,iso());}
+function calc(){return Core.calculate(state.entries,iso(),{baseline:state.settings.baseline,macroMetrics:state.macroFactor.metrics});}
 function aggregate(meals,field){let value=0,missing=0;for(const m of meals){if(m[field]===null||m[field]===undefined)missing++;else value+=m[field];}return {value,missing};}
 function renderDashboard(){
- const c=calc(),estimate=c.ready?c.estimated:state.settings.baseline,date=iso(),today=getEntry(date),goal=getDayGoal(date),sum=today.calories;
- $('estimate').textContent=fmt(estimate);$('badge').textContent=c.ready?'自動推定中':'初期設定値';$('target').textContent=fmt(goal.value);$('target-context').textContent=goal.custom?'この週で設定した目標':'週平均から設定した目標';
- $('estimate-desc').textContent=c.ready?`直近${c.period}日間の食事記録と体重推移から推定。${c.quality==='high'?'十分なデータがあります。':'変動しやすいので記録を続けてね。'}`:`自動推定の準備中。現在は仮の${fmt(state.settings.baseline)} kcalを表示しています。`;
- $('calibration').classList.toggle('hidden',c.ready);$('progress-days').textContent=`${c.days||0} / 14日`;$('calibration-progress').style.width=`${Math.min(100,100*(c.days||0)/14)}%`;
- $('progress-help').textContent=c.reason==='weight'?`食事は連続${c.days}日。体重は${c.weightDays}/8回、計測期間は${c.span}/12日（両方必要）。`:c.reason==='outlier'?'体重変化からの推定値が不自然です。記録を見直してください。':'昨日までの食事を14日連続で「完了」にし、同期間内に8回以上、12日間にわたる体重記録が必要です。';
- $('estimate-facts').innerHTML=c.ready?`<span class="chip">平均摂取 ${fmt(c.avgCalories)} kcal</span><span class="chip">体重傾向 ${c.weeklyChange>=0?'+':''}${c.weeklyChange.toFixed(2)} kg/週</span>`:'';
+ const c=calc(),estimate=c.estimated,date=iso(),today=getEntry(date),goal=getDayGoal(date),sum=today.calories;
+ $('estimate').textContent=fmt(estimate);
+ const messages={
+  macrofactor:{badge:'MF基準値を引き継ぎ',desc:`MacroFactorの${c.anchorDate?nice(c.anchorDate):"—"}時点の推定消費 ${fmt(c.anchorEstimate)} kcal/日を引き継いでいます。新しい食事と体重の記録が揃うと徐々に更新します。`},
+  updated:{badge:c.holding?'記録不足のため保留':'推定更新中',desc:`MacroFactor最終推定 ${fmt(c.anchorEstimate)} kcal/日を起点に、過去${c.period}日間の食事と体重の傾向を使って段階的に更新しています。${c.holding?'最近の記録が少ないため一時的に値を維持中。':''}`},
+  independent:{badge:c.holding?'データ不足のため保留':'自動推定中',desc:`過去${c.period}日間の食事と体重の傾向から独自に推定。${c.holding?'最近の記録が少ないため直近の値を維持中。':''}`},
+  baseline:{badge:'初期設定値',desc:`計算に必要な記録がまだ十分ではありません。設定した仮の値 ${fmt(state.settings.baseline)} kcal/日を表示中。`}
+ };
+ const message=messages[c.source]||messages.baseline;
+ $('badge').textContent=message.badge;
+ $('target').textContent=fmt(goal.value);$('target-context').textContent=goal.custom?'この週で設定した目標':'週平均から設定した目標';
+ $('estimate-desc').textContent=message.desc;
+ $('calibration').classList.toggle('hidden',c.source!=='baseline');
+ $('progress-days').textContent=`${c.days||0} / 34日（直近42日）`;
+ $('calibration-progress').style.width=`${Math.min(100,100*(c.days||0)/34)}%`;
+ $('progress-help').textContent='長期間の推定には、直近56〜84日分の十分な完了食事記録と体重の計測が必要。未完了の日は除外します。';
+ $('estimate-facts').innerHTML=c.rawTdee!==undefined?`<span class="chip">参考：期間平均摂取 ${fmt(c.avgCalories)} kcal</span><span class="chip">体重傾向 ${c.weeklyChange>=0?'+':''}${c.weeklyChange.toFixed(2)} kg/週</span><span class="chip">計算期間 ${c.period}日</span>`: (c.anchorDate?`<span class="chip">MF最終記録 ${esc(c.anchorDate)}</span>`:'');
  $('today-cal').textContent=sum===null?'—':`${fmt(sum)} kcal`;$('today-weight').textContent=today.weight===null?'—':`${precise(today.weight)} kg`;
  $('today-delta').textContent=difference(sum,goal.value);$('today-progress').innerHTML=goalSummary(sum,goal.value);
  $('today-complete').textContent=today.complete?'食事記録は完了':'食事記録は未完了';
