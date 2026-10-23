@@ -2,7 +2,7 @@
   "id": "./",
   "name": "代謝ログ - 食事・体重・筋トレの管理",
   "short_name": "代謝ログ",
-  "description": "食事・体重・筋トレの記録と、MacroFactor履歴を引き継ぐ安定化した消費カロリー推定（v4.5）",
+  "description": "食事・体重・筋トレの記録と、MacroFactor履歴を引き継ぐ安定化した消費カロリー推定（v4.6）",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
